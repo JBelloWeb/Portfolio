@@ -324,3 +324,17 @@ main ul{
 .top-card{
     z-index: 0;
 }
+
+.move-back{
+    animation: moveBack 0.5s ease-out;
+}
+
+@keyframes moveBack {
+    from{
+        transform: translateX(-50%);
+    }
+    to{
+        z-index: -3;
+        transform: translateX(30px);
+    }
+}
