@@ -298,16 +298,6 @@ main ul{
     width: 17rem;
 }
 
-#tarjetas .tarjeta:nth-child(2){
-    transform: translateX(10px);
-    z-index: -1;
-}
-
-#tarjetas .tarjeta:nth-child(3){
-    transform: translateX(20px);
-    z-index: -2;
-}
-
 .tarjeta{
     position: absolute;
     inset: 0;
@@ -319,4 +309,18 @@ main ul{
 
     background-color: var(--Bello-Red);
     outline: var(--Bello-Cream) 5px solid;
+}
+
+.last-card{
+    transform: translateX(20px);
+    z-index: -2;
+}
+
+.middle-card{
+    transform: translateX(10px);
+    z-index: -1;
+}
+
+.top-card{
+    z-index: 0;
 }
