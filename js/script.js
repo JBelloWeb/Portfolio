@@ -9,7 +9,7 @@ bars.addEventListener("click", () => {
 });
 
 d.addEventListener("click", (e) => {
-    if (e.target !== bars && ul.className === "active") {
+    if (e.target !== bars && !ul.contains(e.target) && ul.className === "active") {
         bars.className = "fa-solid fa-bars";
         ul.className = "disactive";
 }});

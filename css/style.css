@@ -346,10 +346,11 @@ main ul{
 }
 
 .carousel{
-    margin: 100px auto;
-    width: 100vw;
+    margin: 50px auto;
+    width: 100%;
     display: flex;
     overflow-x: auto;
+        background-color: hsla(from var(--Bello-Red) h s l / 45%);
 }
 
 #softwares ::-webkit-scrollbar {
@@ -369,13 +370,11 @@ main ul{
 .group{
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: var(--Bello-Red);
-    
+    justify-content: center;    
 }
 
 .skill{
-    padding: 10px;
+        padding: 10px;
     text-align: center;
     align-items: center;
 }
@@ -394,7 +393,7 @@ main ul{
 
 #personal .mover{
     .group{
-        animation: spin 20s linear infinite reverse;
+        animation: spin 15s linear infinite reverse;
     }
 
     &:hover{
