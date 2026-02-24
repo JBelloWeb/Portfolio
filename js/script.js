@@ -34,7 +34,7 @@ const CardToBack = () => {
     firstCard.classList.toggle("move-back");
     setInterval(() => {
         ReorderCards();
-    }, 3000);
+    }, 1000);
 }
 
 for(let t of tarjetas){

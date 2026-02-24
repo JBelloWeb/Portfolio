@@ -307,7 +307,7 @@ main ul{
     border-radius: 25px;
     flex-direction: column;
 
-    background-color: var(--Bello-Red);
+    /* background-color: var(--Bello-Red); */
     outline: var(--Bello-Cream) 5px solid;
 }
 
@@ -326,7 +326,7 @@ main ul{
 }
 
 .move-back{
-    animation: moveBack 0.5s ease-out;
+    animation: moveBack 1s ease-out forwards;
 }
 
 @keyframes moveBack {
