@@ -307,7 +307,7 @@ main ul{
     border-radius: 25px;
     flex-direction: column;
 
-    /* background-color: var(--Bello-Red); */
+    background-color: var(--Bello-Red); 
     outline: var(--Bello-Cream) 5px solid;
 }
 
@@ -330,11 +330,81 @@ main ul{
 }
 
 @keyframes moveBack {
-    from{
-        transform: translateX(-50%);
+    0%{
+        transform: translateX(0);
+        z-index: 0;
+    }
+
+    50%{
+        z-index: 0;
+        transform: translateX(-100%);
     }
     to{
         z-index: -3;
         transform: translateX(30px);
     }
+}
+
+.carousel{
+    margin: 100px auto;
+    width: 100vw;
+    display: flex;
+    overflow-x: auto;
+}
+
+#softwares ::-webkit-scrollbar {
+    display: none ;
+}
+
+#personal ::-webkit-scrollbar {
+    display: none ;
+}
+
+.mover{
+    display: flex;
+    overflow-x: auto;
+
+}
+
+.group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--Bello-Red);
+    
+}
+
+.skill{
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+#softwares .mover{
+    .group{
+        animation: spin 10s linear infinite;
+    }
+
+    &:hover{
+        .group{
+            animation-play-state: paused;
+        }
+    }
+}
+
+#personal .mover{
+    .group{
+        animation: spin 20s linear infinite reverse;
+    }
+
+    &:hover{
+        .group{
+            animation-play-state: paused;
+        }
+    }
+}
+
+@keyframes spin{
+    from{translate: 0;}
+    from{translate: -100%;}
 }
