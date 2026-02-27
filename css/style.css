@@ -87,12 +87,14 @@ color: var(--Bello-Cream);
     from {
         opacity: 0;
         translate: 0 100px;
+        transform: scale(0.5);
         filter: blur(.5);
     }
 
     to {
         opacity: 1;
         translate: 0 0;
+        transform: scale(1);
         filter: blur(0);
     }
 }
@@ -253,6 +255,13 @@ main ul{
         background: radial-gradient(circle,rgba(215, 38, 56, 1) 40%, rgba(168, 34, 47, 1) 100%);
         color: var(--Bello-Cream);
         font-size: .9rem;
+        transition: all 0.15s ease-out;
+
+        animation: unroll 0.5s ease-out;
+
+        &:hover{
+            filter: brightness(1.1);
+        }
     }
 }
 
@@ -262,9 +271,22 @@ main ul{
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.15s ease-out;
+    &:hover{
+            transform: scale(1.1);
+        }
     
     i{
         transform: scale(150%);
+    }
+}
+
+@keyframes unroll{
+    from{
+        height: 0;
+    }
+    to{
+        height: 100%;
     }
 }
 
@@ -459,4 +481,123 @@ main ul{
 @keyframes spin{
     from{translate: 0;}
     from{translate: -100%;}
+}
+
+.button{
+    cursor: pointer;
+    min-width: fit-content;
+    max-width: 120px;
+    overflow: hidden;
+
+    font-family: 'Type Machine';
+    color: var(--Bello-Cream);
+
+    padding: 0.1rem 1rem;
+    border-radius: 10px;
+
+    background-color: hsla(from var(--Bello-Red) h s calc(l + 5));
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+    inset 0px 0px 20px 2px hsla(from var(--Bello-Black) h s calc(l - 5) / 55%),
+    inset 0px 0px 20px 8px var(--Bello-Black); 
+
+    position: relative;
+
+    transition: all 0.25s;
+
+    a{
+        padding: 0.4rem 1rem;
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 2;
+        transition: letter-spacing 0.1s;
+    }
+
+}
+.button::before{
+    content: '';
+    position: absolute;
+    height: 110%;
+    width: 0%;
+    right: 0;
+    z-index: 1;
+
+    background-color: hsla(from var(--Bello-Cream) h s calc(l + 5));
+    
+    border-radius: 10px;
+
+    box-shadow:
+    /* inset 0px 0px 20px 2px hsla(from var(--main-backColor) h s calc(l - 5) / 55%), */
+    inset 0px 0px 20px 8px var(--Bello-Black); 
+
+    transition: all 0.5s;
+}
+.button:hover{
+
+    &::before{
+        right: auto;
+        left: 0;
+        width: 110%;
+    }
+}
+.button:active{
+    transform: scale(0.95);
+
+    a{
+        letter-spacing: 0px;
+    }
+}
+
+.shine {
+
+    transition: background-color 0.3s;
+    transition: transform 0.2s;
+
+    position: relative;
+    overflow: hidden;
+
+
+    &:hover{
+        ::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50px;
+            transform: rotate(25deg) scaleY(200%);
+            filter: opacity(0);
+            display: block;
+            height: 100%;
+            width: 20px;
+            background-color: var(--Bello-Cream);
+            mix-blend-mode: luminosity;
+            animation: shine 5s ease-out infinite;
+        }
+    }
+}
+
+@keyframes shine{
+    0%, 100% {
+        filter: opacity(0);
+    }
+
+    20% {
+        filter: opacity(.5) blur(10px);
+    }
+
+    40% {
+        left: 150%;
+        filter: opacity(.5);
+    }
+
+    41%{
+        filter: opacity(0);
+    }
+
+    100%{
+        left: -50px;
+    }
 }
