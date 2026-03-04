@@ -53,6 +53,54 @@ tarjetas.forEach((t) => {
   t.addEventListener("click", CardToBack);
 });
 
+// Modern reveal-on-scroll using IntersectionObserver
+(function () {
+  const supportsIO = "IntersectionObserver" in window;
+  const opts = { threshold: 0.12, rootMargin: "0px 0px -8% 0px" };
+
+  // Observe main sections, headers and cards but DO NOT add reveal to
+  // individual `.tarjeta` elements (they have their own transform-based
+  // animations handled elsewhere).
+  const targets = Array.from(
+    d.querySelectorAll(
+      "main#inicio, .section-header, .card, .projects-grid, #tarjetas"
+    )
+  );
+
+  targets.forEach((el) => {
+    // skip individual tarjeta elements to preserve their existing transforms
+    if (el.classList && el.classList.contains("tarjeta")) return;
+    el.classList.add("reveal");
+    // only apply stagger to project grids (not to #tarjetas which uses absolute stacking)
+    if (el.matches(".projects-grid")) el.classList.add("stagger");
+  });
+
+  if (!supportsIO) {
+    targets.forEach((el) => el.classList.add("in-view"));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      const el = entry.target;
+      el.classList.add("in-view");
+
+      if (el.classList.contains("stagger")) {
+        const children = Array.from(el.children);
+        children.forEach((ch, i) => {
+          ch.style.transitionDelay = `${i * 80}ms`;
+        });
+      }
+
+      observer.unobserve(el);
+    });
+  }, opts);
+
+  targets.forEach((t) => io.observe(t));
+})();
+
 
 
 

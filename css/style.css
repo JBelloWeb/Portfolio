@@ -10,6 +10,7 @@
     --Bello-Black: #1f2428;
     --Bello-Cream: #fff2c7;
     --Bello-Red: #D72638;
+    --Bello-Purple: #7a5ddd;
 }
 
 html {
@@ -684,7 +685,7 @@ main ul{
     right: 0;
     z-index: 1;
 
-    background-color: hsla(from var(--Bello-Cream) h s calc(l + 5));
+    background-color: hsla(from var(--Bello-Purple) h s calc(l + 5));
     
     border-radius: 10px;
 
@@ -851,9 +852,9 @@ main ul{
 }
 
 #contacto .contact-btn:hover{
-    background-color: var(--Bello-Cream);
-    color: var(--Bello-Black);
-    box-shadow: 0 0 0 2px hsla(from var(--Bello-CREAM) h s l / 30%);
+    background-color: var(--Bello-Purple);
+    color: var(--Bello-Cream);
+    box-shadow: 0 0 0 2px hsla(from var(--Bello-Purple) h s l / 15%);
     transform: translateY(-1px);
 }
 
@@ -870,4 +871,119 @@ main ul{
     .form-row-inline .form-row{
         flex: 1;
     }
+}
+
+/* FOOTER */
+.site-footer{
+    margin-top: 4rem;
+    padding: 2rem 1.25rem;
+    background: linear-gradient(180deg, rgba(4,5,5,0.9), rgba(21,25,25,0.95));
+    border-top: 3px solid var(--Bello-Cream);
+    color: var(--Bello-Cream);
+}
+.site-footer .footer-inner{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto 1rem auto;
+}
+.site-footer .footer-col h4{
+    font-family: 'TypeMachine', sans-serif;
+    margin-bottom: 0.5rem;
+    color: var(--Bello-Red);
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-size: 0.85rem;
+}
+.site-footer a{ color: var(--Bello-Cream); }
+.site-footer .footer-social{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.site-footer .footer-social li{
+    list-style: none;
+}
+.site-footer .footer-social a{
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: radial-gradient(circle, rgba(215,38,56,1) 30%, rgba(31,36,40,1) 100%);
+    color: var(--Bello-Cream);
+    transition: transform 0.12s ease-out, filter 0.12s ease-out;
+}
+.site-footer .footer-social a:hover{ transform: translateY(-3px); filter: brightness(1.05); }
+.site-footer .footer-bottom{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.85rem;
+}
+.site-footer .back-top{
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--Bello-Cream);
+    color: var(--Bello-Cream);
+    transition: transform 0.12s ease-out, background-color 0.12s;
+}
+.site-footer .back-top:hover{ transform: translateY(-3px); background-color: var(--Bello-Cream); color: var(--Bello-Black); }
+
+@media (min-width: 768px){
+    .site-footer .footer-inner{ flex-direction: row; }
+    .site-footer .footer-col{ flex: 1; }
+    .site-footer .footer-col:first-child{ max-width: 340px; }
+}
+
+/* Modern reveal-on-scroll system -------------------------------------------------- */
+/* Base hidden state for any element we want to reveal */
+.reveal{
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+    filter: blur(6px);
+    will-change: transform, opacity, filter;
+    transition: transform 700ms cubic-bezier(.16,.84,.29,1), opacity 700ms cubic-bezier(.16,.84,.29,1), filter 700ms ease;
+    animation: none !important;
+}
+.reveal.in-view{
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* Stagger children for grouped reveals (projects grid, tarjetas, etc.) */
+.reveal.stagger > *{
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+    transition: transform 600ms cubic-bezier(.16,.84,.29,1), opacity 600ms cubic-bezier(.16,.84,.29,1), filter 600ms ease;
+}
+.reveal.stagger.in-view > *{
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+/* small performance-friendly tweak for reduced motion */
+@media (prefers-reduced-motion: reduce){
+    .reveal, .reveal.stagger > *{
+        transition-duration: 100ms !important;
+    }
+}
+
+/* Convenience utility to highlight important CTAs with the accent color */
+.accent-purple{
+    background-color: var(--Bello-Purple);
+    color: var(--Bello-Cream);
 }
