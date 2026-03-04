@@ -99,15 +99,29 @@
     <section class="section-header" id="proyectos">
         <h2>Proyectos</h2>
 
-        <div class="card glass">
-            <picture>
-                <source media="(max-width: 600px)" srcset="media/Cat-Shop.png">
-                <img src="media/Cat-Shop.png" alt="Miniatura del proyecto Cat-Shop">
-            </picture>
-            <div class="card-content">
-                <h3>Cat Shop</h3>
-                <p>Tienda ficticia donde desarrollo toda la funcionalidad Front-End de un E-Commerce. Utilizando JavaScript desarrollo filtros, eventos especiales, calculadora de precios, grupos de productos y más. Priorizo una experiencia llamativa para el usuario.</p>
-            </div>
+        <p class="projects-intro">Algunos de los proyectos donde combino desarrollo, diseño y experiencia de usuario.</p>
+
+        <div class="projects-grid">
+            <article class="card glass">
+                <picture>
+                    <source media="(max-width: 600px)" srcset="media/Cat-Shop.png">
+                    <img src="media/Cat-Shop.png" alt="Miniatura del proyecto Cat-Shop">
+                </picture>
+                <div class="card-content">
+                    <h3>Cat Shop</h3>
+                    <p>Tienda ficticia donde desarrollo toda la funcionalidad Front-End de un E-Commerce. Utilizando JavaScript implemento filtros, carrito, cálculo de precios y una experiencia de compra dinámica.</p>
+                    <div class="project-meta">
+                        <ul class="project-tags">
+                            <li class="project-tag">HTML</li>
+                            <li class="project-tag">CSS</li>
+                            <li class="project-tag">JavaScript</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/JBelloWeb" target="_blank" rel="noopener">Ver código</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
 
@@ -117,21 +131,24 @@
         <div id="tarjetas">
             <div class="tarjeta">
                 <figure>
-                    <img src="media/Lead.png" alt="">
+                    <img src="media/Lead.png" alt="Liderazgo y coordinación de equipos">
                 </figure>
-                <h3>1</h3>
+                <h3>Liderazgo en equipos creativos</h3>
+                <p>Comencé coordinando pequeños proyectos y equipos multidisciplinarios, aprendiendo a equilibrar objetivos, tiempos y la motivación del grupo.</p>
             </div>
             <div class="tarjeta">
                 <figure>
-                    <img src="media/Skills.png" alt="">
+                    <img src="media/Skills.png" alt="Desarrollo de habilidades técnicas y creativas">
                 </figure>
-                <h3>2</h3>
+                <h3>Construyendo habilidades técnicas</h3>
+                <p>Profundicé en desarrollo, diseño y experiencia de usuario, combinando lo visual con lo funcional para crear productos coherentes.</p>
             </div>
             <div class="tarjeta">
                 <figure>
-                    <img src="media/Team.png" alt="">
+                    <img src="media/Team.png" alt="Trabajo en equipo y comunidad">
                 </figure>
-                <h3>3</h3>
+                <h3>Trabajo en comunidad</h3>
+                <p>Hoy aplico todo eso trabajando en equipo, compartiendo conocimiento y buscando soluciones que sumen valor real a quienes las usan.</p>
             </div>
         </div>
 
@@ -152,7 +169,23 @@
 
     <section class="section-header" id="contacto">
         <h2>Contacto</h2>
-        <form action=""></form>
+        <form id="contact-form" autocomplete="on">
+            <div class="form-row-inline">
+                <div class="form-row">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="tucorreo@mail.com" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contame sobre tu proyecto o idea" required></textarea>
+            </div>
+            <button type="submit" class="contact-btn">Enviar mensaje</button>
+        </form>
     </section>
 
     <footer>
