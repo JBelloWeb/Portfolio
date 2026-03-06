@@ -252,14 +252,18 @@ main#inicio{
 
     overflow: hidden;
     animation: fromTop 0.5s ease-out;
-    
-    img{
-        transform: translateY(50px);
-        width: 100%;
-        height: auto;
-        margin: auto;
-    }
+}
 
+
+/* Asegura que la foto de perfil siempre cubra el contenedor y sea responsive */
+#photo img,
+#photo picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
+    display: block;
+    transform: translateY(30px);
 }
 
 @keyframes fromTop {
