@@ -17,6 +17,17 @@ d.addEventListener("click", (e) => {
   }
 });
 
+// Cerrar la barra lateral al pulsar cualquiera de sus enlaces
+if (ul) {
+  const sidebarLinks = Array.from(ul.querySelectorAll("a"));
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      bars.className = "fa-solid fa-bars";
+      ul.className = "disactive";
+    });
+  });
+}
+
 // HISTORIA - TARJETAS
 const ReorderCards = () => {
   tarjetas.forEach((t, i) => {

@@ -78,13 +78,13 @@ color: var(--Bello-Cream);
 }
 
 #proyectos, #historia, #habilidades, #lab{
-    margin-bottom: 400px;
+    margin-bottom: 500px;
 }
 
 #proyectos, #historia, #lab, #contacto{
-    animation: reveal 0.7s ease-out both;
+    animation: reveal 0.5s ease-out both;
     animation-timeline: view();
-    animation-range: entry 10% cover 45%;
+    animation-range: entry 10% cover 50%;
 }
 
 @keyframes reveal {
@@ -764,6 +764,95 @@ main ul{
 
     100%{
         left: -50px;
+    }
+}
+
+.cards-container
+    {
+        display: inline-block;
+        margin: 0 2%;
+        width: 20%;
+        height: 300px;
+    }
+
+    .card-lab
+    {
+        background-color: var(--Bello-Purple);
+        box-shadow: 0px 5px 10px 0px rgb(35, 34, 33);
+        height: 350px;
+        width: 250px;
+        margin: auto;
+        border-radius: 25px;
+        z-index: 1;
+        h3{text-align: center; padding-top: 60%; font-size: 22px; color: var(--Bello-Cream);}
+    }
+    .hide
+    {
+        height: 350px;
+        width: 250px;
+        margin: auto;
+        transform: translateY(-150px);
+        border-radius: 25px;
+        translate: 1rem -200px 0;
+        position: absolute;
+        z-index: -1;
+        background-color: var(--Bello-Cream);
+        padding: 0 5px;
+        img{margin: 25px 10px 10px 10px; width: 80%; border-radius: 15px; text-align: center;}
+    }
+        .cards-container:hover
+        {
+            .card-lab
+            {
+                animation: show 0.5s linear forwards;
+            }
+        
+            .hide
+            {
+                animation: over 0.5s linear forwards;
+            }
+        }
+
+@keyframes show
+{
+    0%
+    {
+        transform-origin: center left;
+        transform: translateX(0px) ;
+    }
+
+    50%
+    {
+        transform: translateX(-90%);
+        filter: brightness(100%);
+
+    }
+
+    100%
+    {
+        transform: translateX(-2rem);
+        filter: brightness(50%);
+    }
+}
+
+@keyframes over
+{
+    0%
+    {
+        filter: brightness(0);
+    }
+
+    51%
+    {
+        filter: brightness(1);
+        transform: translateX(1rem) translateY(-150px);
+        z-index: -1;
+    }
+
+    100% 
+    {
+        transform: translateX(-2rem) translateY(-150px);
+        z-index: 2;
     }
 }
 
