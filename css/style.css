@@ -50,11 +50,15 @@ overflow-wrap: break-word;
 .t-red{
     color: var(--bello-red);
 }
+.t-purple{
+    color: var(--bello-purple);
+}
 .bg-red{
     background-color: var(--bello-red);
 }
 .bg-black{
     background-color: var(--bello-black);
+    color: #fff2c7;
 }
 .bg-purple{
     background-color: var(--bello-purple);
@@ -169,6 +173,12 @@ h2{
     padding:  0 2rem;
 }
 
+.clip-section hr{
+    border-color: var(--bello-cream);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
 .clip-section .content{
     margin: auto;
     display: flex;
@@ -221,6 +231,19 @@ h2{
 
 #education .clip-icon{
     translate: 6rem 0;
+}
+
+.description{
+    font-family: 'Dignitary';
+
+    margin-bottom: 4rem;
+}
+
+
+.project-card{
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
 }
 
 #contact{

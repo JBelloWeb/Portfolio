@@ -4,6 +4,8 @@ const education = document.getElementById('education');
 
 const sections = [projects, lab, education];
 
+const tags = document.querySelectorAll('.tags');
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     entry.target.classList.toggle('visible', entry.isIntersecting);
@@ -21,3 +23,11 @@ sections.forEach(s => {
     s.style.zIndex = '10';
   });
 });
+
+for(let t of tags){
+  let tag = t.querySelectorAll('span');
+
+  for(let i of tag){
+    i.style = "border-radius: 25px; background-color: red; padding: 0.3rem; min-width: 100px;"
+  }
+}
