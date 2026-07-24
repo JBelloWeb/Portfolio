@@ -4,12 +4,8 @@ const education = document.getElementById('education');
 
 const sections = [projects, lab, education];
 
-<<<<<<< HEAD
-const tags = document.querySelectorAll('.tags');
-=======
 const tags = document.querySelectorAll('.tag');
 
->>>>>>> dev
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -30,14 +26,6 @@ sections.forEach(s => {
 });
 
 for(let t of tags){
-<<<<<<< HEAD
-  let tag = t.querySelectorAll('span');
-
-  for(let i of tag){
-    i.style = "border-radius: 25px; background-color: red; padding: 0.3rem; min-width: 100px;"
-  }
-}
-=======
   switch(t.textContent){
     case 'HTML':
       t.style = "--tech-color: #E34F2640";
@@ -363,4 +351,3 @@ document.getElementById('edu-modal').addEventListener('click', e => {
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.getElementById('edu-modal').classList.remove('show');
 });
->>>>>>> dev

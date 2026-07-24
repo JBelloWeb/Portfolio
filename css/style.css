@@ -179,14 +179,6 @@ h2{
     padding:  0 2rem;
 }
 
-<<<<<<< HEAD
-.clip-section hr{
-    border-color: var(--bello-cream);
-    opacity: 0.6;
-    margin-bottom: 1rem;
-}
-
-=======
 hr{
     border-color: var(--bello-purple);
     margin: 10px 0px;
@@ -198,7 +190,6 @@ hr{
     margin-bottom: 1.5rem;
     opacity: 0.5;
 }
->>>>>>> dev
 .clip-section .content{
     margin: auto;
     display: flex;
@@ -253,19 +244,6 @@ hr{
     translate: 6rem 0;
 }
 
-<<<<<<< HEAD
-#education .card-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.description{
-    font-family: 'Dignitary';
-
-    margin-bottom: 4rem;
-=======
 .card-container{
     margin-top: 2rem;
     display: flex;
@@ -276,7 +254,6 @@ hr{
 
 #education .card-container{
     justify-content: center;
->>>>>>> dev
 }
 
 .card{
@@ -285,12 +262,6 @@ hr{
 }
 
 .project{
-<<<<<<< HEAD
-    max-width: 40%;
-}
-
-.edu{
-=======
     color: var(--bello-cream);
     max-width: 45%;
     letter-spacing: 0.06rem;
@@ -328,7 +299,6 @@ hr{
 }
 
 .edu-card{
->>>>>>> dev
     padding: 1rem;
     aspect-ratio: 2.5 /1.5 ;
     background-color:rgb(252 255 246);
@@ -339,35 +309,19 @@ hr{
 
     text-align: center;
     color: var(--bello-black);
-<<<<<<< HEAD
-}
-.edu h3{
-=======
 
     transition: all 0.25s;
 }
 
 .edu-card h3{
     font-family: 'Dignitary';
->>>>>>> dev
     font-size: 1.1rem;
     color: var(--bello-black);
 }
 
-<<<<<<< HEAD
-.edu h4{
-    height: 50%;
-}
-
-.edu hr{
-    border-color: var(--bello-black);
-}
-
-=======
 .edu-card hr{
     border-color: var(--bello-black);
 }
->>>>>>> dev
 #contact{
     min-height: 200px;
 }
