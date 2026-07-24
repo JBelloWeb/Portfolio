@@ -99,3 +99,255 @@ for(let t of tags){
       break;
   }
 }
+
+const tarjeta = document.querySelectorAll('.card-3d');
+
+for(let t of tarjeta){
+  t.addEventListener('mousemove', (e) => {
+  // Obtenemos las dimensiones y la posición de la t en la pantalla
+  const rect = t.getBoundingClientRect();
+
+  // Calculamos la posición del cursor *dentro* de la t
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  // Encontramos el centro exacto de la t
+  const centroX = rect.width / 2;
+  const centroY = rect.height / 2;
+
+  // Calculamos la rotación. 
+  // Multiplicamos por 20 para definir el límite máximo de grados de rotación.
+  // El eje Y controla izquierda/derecha, el eje X controla arriba/abajo.
+  const rotacionX = ((y - centroY) / centroY) * -10;
+  const rotacionY = ((x - centroX) / centroX) * 10;
+
+  // Aplicamos la rotación en tiempo real
+  t.style.transform = `rotateX(${rotacionX}deg) rotateY(${rotacionY}deg)`;
+});
+
+// Cuando el cursor sale de la t, la devolvemos a su estado original
+t.addEventListener('mouseleave', () => {
+  // Hacemos la transición más lenta para que el regreso sea suave
+  t.style.transition = 'transform 0.5s ease';
+  t.style.transform = `rotateX(0deg) rotateY(0deg)`;
+});
+
+// Cuando el cursor entra, restauramos la transición rápida
+t.addEventListener('mouseenter', () => {
+  t.style.transition = 'transform 0.1s ease-out';
+});
+}
+
+function timeAgo(dateStr) {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'now';
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    if (days < 30) return `${days}d ago`;
+    const mo = Math.floor(days / 30);
+    if (mo < 12) return `${mo}mo ago`;
+    return `${Math.floor(mo / 12)}y ago`;
+}
+
+async function fillGhBadges() {
+    const badges = document.querySelectorAll('.gh-badge');
+    const fetches = [...badges].map(async badge => {
+        const repo = badge.dataset.repo;
+        try {
+            const res = await fetch(`https://api.github.com/repos/${repo}`);
+            if (!res.ok) return;
+            const data = await res.json();
+            badge.textContent = `🕐 ${timeAgo(data.pushed_at)}`;
+            badge.title = `${data.language || 'N/A'}${data.description ? ` · ${data.description}` : ''}`;
+            badge.closest('.card.project')._repoData = data;
+        } catch {
+            // fallback silencioso
+        }
+    });
+    await Promise.all(fetches);
+}
+
+async function renderGhContrib() {
+    const container = document.getElementById('gh-contrib');
+    if (!container) return;
+    const user = container.dataset.user;
+
+    try {
+        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`);
+        if (!res.ok) throw new Error();
+        let { contributions } = await res.json();
+        if (!contributions || !contributions.length) return;
+
+        const sixMoAgo = new Date();
+        sixMoAgo.setMonth(sixMoAgo.getMonth() - 6);
+        contributions = contributions.filter(c => new Date(c.date) >= sixMoAgo);
+        if (!contributions.length) return;
+
+        const map = {};
+        contributions.forEach(c => { map[c.date] = c.count; });
+
+        const first = new Date(contributions[0].date);
+        const last = new Date(contributions[contributions.length - 1].date);
+        const start = new Date(first);
+        start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+        const totalWeeks = Math.floor((last - start) / 604800000) + 1;
+
+        const months = {};
+        for (let w = 0; w < totalWeeks; w++) {
+            const mid = new Date(start.getTime() + (w * 7 + 3) * 86400000);
+            const key = `${mid.getFullYear()}-${mid.getMonth()}`;
+            if (!months[key]) months[key] = { l: mid.toLocaleString('en', { month: 'short' }), c: w + 2 };
+        }
+
+        const dayLabels = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+        const grid = document.createElement('div');
+        grid.className = 'gh-grid';
+        grid.style.setProperty('--weeks', totalWeeks);
+        grid.style.setProperty('--cols', String(totalWeeks + 1));
+
+        Object.values(months).forEach(m => {
+            const el = document.createElement('span');
+            el.className = 'gh-month-label';
+            el.style.gridColumn = String(m.c);
+            el.style.gridRow = '1';
+            el.textContent = m.l;
+            grid.appendChild(el);
+        });
+
+        for (let col = 1; col <= totalWeeks; col++) {
+            for (let row = 1; row <= 7; row++) {
+                const cellDate = new Date(start.getTime() + ((col - 1) * 7 + (row - 1)) * 86400000);
+                const dateStr = cellDate.toISOString().split('T')[0];
+                const isFuture = cellDate > new Date();
+
+                const el = document.createElement('span');
+                el.className = 'gh-day';
+                el.style.gridColumn = String(col + 1);
+                el.style.gridRow = String(row + 1);
+
+                if (col === 1 && dayLabels[row - 1]) {
+                    el.textContent = dayLabels[row - 1];
+                    el.classList.add('gh-day-label');
+                }
+
+                if (!isFuture && map[dateStr] !== undefined) {
+                    const count = map[dateStr];
+                    const level = count === 0 ? 0 : Math.min(Math.ceil(count / 4) + 1, 4);
+                    el.dataset.level = level;
+                    el.dataset.count = count;
+                    el.dataset.date = dateStr;
+                } else if (!isFuture) {
+                    el.dataset.level = 0;
+                }
+
+                grid.appendChild(el);
+            }
+        }
+
+        container.textContent = '';
+        container.appendChild(grid);
+
+        const legend = document.createElement('div');
+        legend.className = 'gh-legend';
+        legend.innerHTML = 'Less <span class="gh-legend-swatches">' +
+            [0,1,2,3,4].map(l => `<span data-level="${l}"></span>`).join('') +
+        '</span> More';
+        container.appendChild(legend);
+
+    } catch {
+        container.innerHTML = '<p class="gh-error">Failed to load contributions</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const projects = document.querySelectorAll('.card.project');
+    const modal = document.getElementById('cursor-modal');
+    const modalImg = modal.querySelector('.modal-img');
+    const modalText = modal.querySelector('.modal-text');
+
+    fillGhBadges();
+    renderGhContrib();
+
+    projects.forEach(project => {
+        project.addEventListener('mouseenter', async () => {
+            const imgSrc = project.getAttribute('data-image');
+            if (imgSrc) {
+                modalImg.src = imgSrc;
+                modalImg.style.display = 'block';
+            } else {
+                modalImg.style.display = 'none';
+            }
+
+            const repo = project._repoData;
+            if (repo) {
+                const repoName = project.dataset.repo;
+
+                if (!project._commitsLoaded && repoName) {
+                    project._commitsLoaded = true;
+                    try {
+                        const res = await fetch(`https://api.github.com/repos/${repoName}/commits?per_page=3`);
+                        if (res.ok) project._commits = await res.json();
+                    } catch {}
+                }
+
+                const commits = project._commits;
+                let commitsHtml = '';
+                if (commits && commits.length) {
+                    commitsHtml = `
+                        <hr class="gh-divider">
+                        ${commits.map(c => `
+                            <div class="gh-commit">
+                                <span class="gh-commit-msg">📝 ${c.commit.message.split('\n')[0]}</span>
+                                <span class="gh-commit-date">${timeAgo(c.commit.author.date)}</span>
+                            </div>
+                        `).join('')}
+                    `;
+                }
+
+                modalText.innerHTML = `
+                    <span class="gh-stat">🔤 ${repo.language || '—'}</span>
+                    <span class="gh-stat">🕐 ${timeAgo(repo.pushed_at)}</span>
+                    ${commitsHtml}
+                `;
+                modalText.style.display = 'block';
+            } else {
+                modalText.style.display = 'none';
+            }
+
+            modal.classList.add('show');
+        });
+
+        project.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY - 20;
+            modal.style.left = `${x}px`;
+            modal.style.top = `${y}px`;
+        });
+
+        project.addEventListener('mouseleave', () => {
+            modal.classList.remove('show');
+        });
+    });
+});
+
+document.querySelectorAll('.edu-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const modal = document.getElementById('edu-modal');
+        modal.querySelector('.edu-modal-title').textContent = card.querySelector('h3').textContent;
+        modal.querySelector('.edu-modal-subtitle').textContent = card.querySelector('h4').textContent;
+        modal.querySelector('.edu-modal-desc').textContent = card.querySelector('.edu-desc')?.textContent || '';
+        modal.classList.add('show');
+    });
+});
+
+document.getElementById('edu-modal').addEventListener('click', e => {
+    if (e.target.closest('.edu-modal-content') && !e.target.closest('.edu-modal-close')) return;
+    e.currentTarget.classList.remove('show');
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('edu-modal').classList.remove('show');
+});
