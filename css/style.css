@@ -13,6 +13,8 @@
     --bello-cream:  #fff2c7;
     --bello-black:  #1f2428;
     --bello-purple: #7a5ddd;
+    --mode: #1f2428;
+
 }
 
 html {
@@ -69,7 +71,7 @@ a{
 }
 
 body{
-    background-color: var(--bello-black);
+    background-color: var(--mode);
     color: var(--bello-black) ;
     font-family: 'Type Machine';
 }

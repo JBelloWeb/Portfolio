@@ -48,6 +48,7 @@ const onStart = () => {
   for(let a of air){STATE.ON ? a.classList.remove('d-none') : a.classList.add('d-none');};
 
   set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
+  set(document.documentElement, {'--mode': STATE.ON ? "var(--bello-cream)" :"var(--bello-black)"});
   set(DUMMY, { display: 'none' });
   set(CORDS[0], { display: 'inline' });
   AUDIO.CLICK.play();
