@@ -4,26 +4,26 @@
 :root {
   --on: 0;
   --bg: #1f2428;
-  --cord: #d72638;
-  --lamp-body: #d72638;
-  --lamp-detail: #d72638;
-  --lamp-base: #d72638;
-  --lamp-accent: #d72638;
+  --cord: #7a5ddd;
+  --lamp-body: #7a5ddd;
+  --lamp-detail: #7a5ddd;
+  --lamp-base: #7a5ddd;
+  --lamp-accent: #7a5ddd;
 }
 #bulb {
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg);
-  margin-bottom: 15rem;
 }
 .toggle-scene {
   overflow: visible !important;
   height: 50vmin;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1000;
 }
 .toggle-scene__cord {
   stroke: var(--cord);

@@ -40,15 +40,18 @@ RESET();
 const onStart = () => {
   IS_PLAYING = true;
   STATE.ON = !STATE.ON;
-  WELCOME.className = STATE.ON ? 'grow' : 'ungrow';
-  for (let p of WHOAMI_P) { STATE.ON ? p.classList.remove('d-none') : p.classList.add('d-none'); }
-  STATE.ON ? MID.classList.add('d-none') : MID.classList.remove('d-none');
-  STATE.ON ? MAIN.classList.remove('d-none') : MAIN.classList.add('d-none');
-  STATE.ON ? CONTACT.classList.remove('d-none') : CONTACT.classList.add('d-none');
-  for(let a of air){STATE.ON ? a.classList.remove('d-none') : a.classList.add('d-none');};
 
   set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
   set(document.documentElement, {'--mode': STATE.ON ? "var(--bello-cream)" :"var(--bello-black)"});
+  set(document.documentElement, {'--section-bg': STATE.ON ? "var(--bello-black)" :"#9c2430"});
+  set(document.documentElement, {'--h3-color': STATE.ON ? "var(--bello-red)" : "var(--bello-black)"});
+  set(document.documentElement, {'--clip-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--section-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--text-color': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--title-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-cream)"});
+
+  set(document.documentElement, {'--modal-bg': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--modal-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-black)"});
   set(DUMMY, { display: 'none' });
   set(CORDS[0], { display: 'inline' });
   AUDIO.CLICK.play();
@@ -111,4 +114,6 @@ Draggable.create(PROXY, {
       } });
 
   } });
+
+WELCOME.classList.add('grow');
 

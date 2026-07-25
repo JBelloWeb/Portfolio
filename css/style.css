@@ -14,7 +14,14 @@
     --bello-black:  #1f2428;
     --bello-purple: #7a5ddd;
     --mode: #1f2428;
-
+    --text-color: #fff2c7;
+    --section-bg: #9c2430;
+    --section-text: #fff2c7;
+    --h3-color: #1f1f1f;
+    --title-color: #fff2c7;
+    --clip-color: #fff2c7;
+    --modal-bg: #fff2c7;
+    --modal-text: #1f2428;
 }
 
 html {
@@ -54,30 +61,38 @@ a{
 }
 
 .t-red{
-    color: var(--bello-red);
+    color: var(--title-color);
 }
 .t-purple{
-    color: var(--bello-purple);
+    color: var(--title-color);
 }
 .bg-red{
     background-color: var(--bello-red);
 }
 .bg-black{
     background-color: var(--bello-black);
-    color: #fff2c7;
+    color: var(--section-text);
 }
 .bg-purple{
     background-color: var(--bello-purple);
 }
 
+.header-span{
+    color: var(--bello-red);
+}
+
 body{
     background-color: var(--mode);
-    color: var(--bello-black) ;
+    color: var(--text-color);
     font-family: 'Type Machine';
+    padding-top: 20vmin;
 }
 
 .mid-bar{
     max-height: 350px;
+    flex-shrink: 0;
+    height: 350px;
+    width: auto;
 }
 .key{
     max-height: 300px;
@@ -108,7 +123,7 @@ header{
 header picture{
     border-radius: 15px;
     overflow: hidden;
-    border: 7px solid var(--bello-black);
+    border: 7px solid var(--text-color);
 }
 
 #whoami{
@@ -118,8 +133,14 @@ header picture{
     font-size: 1.2rem;
 }
 
+#welcome{
+    width: 0%;
+    margin: 0;
+    padding: 0;
+}
+
 .grow{
-    animation: grow 1s ease forwards;
+    animation: grow 2.5s ease 0.8s forwards;
     width: 100%;
     font-size: 2rem;
     padding: 0 3.5rem;
@@ -137,13 +158,24 @@ header picture{
         transform: scaleX(0) translateY(-3rem);
         width: 0%;
         opacity: 0;
-
     }
+
+    15%{
+        transform: scaleX(0) translateY(-3rem);
+        width: 0%;
+        opacity: 0;
+    }
+
     50%{
         transform: scaleX(1) translateY(-3rem);
         width: 100%;
         opacity: 0;
     }
+
+    65%{
+        opacity: 1;
+    }
+
     100%{
         transform: scaleX(1) translateY(-3rem);
         width: 100%;
@@ -152,14 +184,13 @@ header picture{
 }
 
 .air{
-    background-color: var(--bello-cream);
     width: 100%;
     height: 30rem;
     
 }
 
 main{
-    background-color: var(--bello-cream);
+
     padding-bottom: 50vh;
 }
 
@@ -177,6 +208,8 @@ h2{
     margin: auto;
     margin-bottom: 5rem;
     box-shadow: 0 11px 6px 0px #0a0a0a77;
+    color: var(--section-text);
+    background-color: var(--section-bg);
 
     padding:  0 2rem;
 }
@@ -264,7 +297,6 @@ hr{
 }
 
 .project{
-    color: var(--bello-cream);
     max-width: 45%;
     letter-spacing: 0.06rem;
 }
@@ -273,7 +305,8 @@ hr{
     font-family: 'Dignitary';
     font-size: 1.5rem;
     font-weight: 700;
-    text-shadow: 0 0 2px var(--bello-red);
+    color: var(--h3-color) ;
+    text-shadow: 0 0 2px var(--h3-color);
 }
 
 .tags{
@@ -307,7 +340,7 @@ hr{
     width: 30%;
     max-width: 350px;
     border: 5px solid var(--bello-red);
-    box-shadow: inset 0px 0px 10px 0px var(--bello-black);
+    box-shadow: inset 0px 0px 10px 0px var(--text-color);
 
     text-align: center;
     color: var(--bello-black);
@@ -318,7 +351,7 @@ hr{
 .edu-card h3{
     font-family: 'Dignitary';
     font-size: 1.1rem;
-    color: var(--bello-black);
+
 }
 
 .edu-card hr{
@@ -472,7 +505,7 @@ hr{
     display: flex;
     justify-content: center;
     background-color: #31383d;
-    outline: 10px solid var(--bello-black);
+    outline: 10px solid var(--section-bg);
     outline-offset: -6px;
     padding: 1.5rem 0;
     padding-right: 2.1rem;
@@ -488,7 +521,7 @@ hr{
 
 .gh-contrib-loading,
 .gh-error {
-    color: var(--bello-cream);
+    color: var(--section-text);
     font-size: 0.85rem;
     opacity: 0.6;
 }
@@ -503,7 +536,7 @@ hr{
 
 .gh-month-label {
     font-size: 0.6rem;
-    color: var(--bello-cream);
+    color: var(--section-text);
     opacity: 0.5;
     text-align: left;
     padding-left: 2px;
@@ -512,7 +545,7 @@ hr{
 
 .gh-day-label {
     font-size: 0.55rem;
-    color: var(--bello-cream);
+    color: var(--section-text);
     opacity: 0.4;
     text-align: right;
     padding-right: 4px;
@@ -562,7 +595,7 @@ hr{
     align-items: center;
     gap: 6px;
     font-size: 0.7rem;
-    color: var(--bello-cream);
+    color: var(--section-text);
     opacity: 0.6;
     align-self: flex-end;
 }
@@ -611,8 +644,8 @@ hr{
 
 .edu-modal-content {
     position: relative;
-    background: var(--bello-cream);
-    color: var(--bello-black);
+    background: var(--modal-bg);
+    color: var(--modal-text);
     border-radius: 16px;
     padding: 2rem;
     max-width: 520px;
@@ -637,7 +670,7 @@ hr{
     font-size: 1.8rem;
     line-height: 1;
     cursor: pointer;
-    color: var(--bello-black);
+    color: var(--modal-text);
     opacity: 0.4;
     transition: opacity 0.2s, color 0.2s;
 }
@@ -669,5 +702,5 @@ hr{
 .edu-modal-body p {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--bello-black);
+    color: var(--modal-text);
 }
