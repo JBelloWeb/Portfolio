@@ -4,11 +4,11 @@
 :root {
   --on: 0;
   --bg: #1f2428;
-  --cord: #7a5ddd;
-  --lamp-body: #7a5ddd;
-  --lamp-detail: #7a5ddd;
-  --lamp-base: #7a5ddd;
-  --lamp-accent: #7a5ddd;
+  --cord: #d72638;
+  --lamp-body: var(--cord);
+  --lamp-detail: var(--cord);
+  --lamp-base: var(--cord);
+  --lamp-accent: var(--cord);
 }
 #bulb {
   display: flex;
@@ -18,7 +18,7 @@
 }
 .toggle-scene {
   overflow: visible !important;
-  height: 50vmin;
+  height: 35vmin;
   position: fixed;
   top: 0;
   left: 50%;
@@ -67,4 +67,16 @@
 }
 .lamp__accent {
   fill: var(--lamp-accent);
+}
+
+.tag {
+  transition: background-color 0.3s, color 0.3s;
+  background-color: color-mix(in srgb,
+    var(--bello-black) calc((1 - var(--on)) * 100%),
+    var(--tech-color) calc(var(--on) * 100%)
+  );
+}
+
+html.off .tag {
+  color: hsl(from var(--tech-color) h 100 calc(l + 20) / 70%);
 }

@@ -15,6 +15,8 @@ const AUDIO = {
 const STATE = {
   ON: false };
 
+document.documentElement.classList.add('off');
+
 const CORD_DURATION = 0.1;
 
 const CORDS = document.querySelectorAll('.toggle-scene__cord');
@@ -44,11 +46,14 @@ const onStart = () => {
   set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
   set(document.documentElement, {'--mode': STATE.ON ? "var(--bello-cream)" :"var(--bello-black)"});
   set(document.documentElement, {'--section-bg': STATE.ON ? "var(--bello-black)" :"#9c2430"});
-  set(document.documentElement, {'--h3-color': STATE.ON ? "var(--bello-red)" : "var(--bello-black)"});
+  set(document.documentElement, {'--h3-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
   set(document.documentElement, {'--clip-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
   set(document.documentElement, {'--section-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-cream)"});
   set(document.documentElement, {'--text-color': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
   set(document.documentElement, {'--title-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--hr-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-black)"});
+  // set(document.documentElement, {'--cord': STATE.ON ? "#d72638" : "#fff2c7"});
+  document.documentElement.classList.toggle('off', !STATE.ON);
 
   set(document.documentElement, {'--modal-bg': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
   set(document.documentElement, {'--modal-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-black)"});
@@ -116,4 +121,3 @@ Draggable.create(PROXY, {
   } });
 
 WELCOME.classList.add('grow');
-

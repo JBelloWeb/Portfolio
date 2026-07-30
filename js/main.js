@@ -181,9 +181,11 @@ async function renderGhContrib() {
         let { contributions } = await res.json();
         if (!contributions || !contributions.length) return;
 
-        const sixMoAgo = new Date();
-        sixMoAgo.setMonth(sixMoAgo.getMonth() - 6);
-        contributions = contributions.filter(c => new Date(c.date) >= sixMoAgo);
+        const isMobile = window.innerWidth < 1024;
+        const monthsRange = isMobile ? -2 : -6;
+        const cutoff = new Date();
+        cutoff.setMonth(cutoff.getMonth() + monthsRange);
+        contributions = contributions.filter(c => new Date(c.date) >= cutoff);
         if (!contributions.length) return;
 
         const map = {};
