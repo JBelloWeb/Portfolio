@@ -338,12 +338,26 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.edu-card').forEach(card => {
     card.addEventListener('click', () => {
         const modal = document.getElementById('edu-modal');
+        const content = modal.querySelector('.edu-modal-content');
         modal.querySelector('.edu-modal-title').textContent = card.querySelector('h3').textContent;
         modal.querySelector('.edu-modal-subtitle').textContent = card.querySelector('h4').textContent;
         modal.querySelector('.edu-modal-desc').textContent = card.querySelector('.edu-desc')?.textContent || '';
+        content.classList.remove('fasta', 'davinci');
+        content.classList.add(card.classList.contains('davinci') ? 'davinci' : 'fasta');
         modal.classList.add('show');
     });
 });
+
+
+const garabato = document.querySelectorAll('.garabato');
+
+for(let g of garabato){
+  let spans = g.querySelectorAll('span');
+  for(let s of spans){
+    let numeroAleatorio = Math.floor(Math.random() * 90) + 10;
+    s.style.setProperty('--aleatorio', `${numeroAleatorio}px`);
+  }
+}
 
 document.getElementById('edu-modal').addEventListener('click', e => {
     if (e.target.closest('.edu-modal-content') && !e.target.closest('.edu-modal-close')) return;

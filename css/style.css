@@ -2,6 +2,11 @@
     font-family: 'Dignitary';
     src: url('../assets/fonts/DignitaryGrandeurBold-vnX9A.ttf');
 }
+@font-face {
+    font-family: 'Dignitary-Light';
+    src: url('../assets/fonts/DignitaryGrandeurLight-vnX9A.ttf');
+}
+
 
 @font-face{
     font-family: 'Type Machine';
@@ -17,12 +22,14 @@
     --text-color: #fff2c7;
     --hr-color: #1f2428;
     --section-bg: #9c2430;
-    --section-text: #fff2c7;
+    --section-text: #fff2c7b6;;
     --h3-color: #fff2c7;
     --title-color: #fff2c7;
     --clip-color: #fff2c7;
     --modal-bg: #fff2c7;
     --modal-text: #1f2428;
+    --air-height: 12rem;
+    --aleatorio: 10px;
 }
 
 html {
@@ -83,8 +90,7 @@ a{
     top: 0;
     left: 0;
     height: 50px;
-    aspect-ratio: 5 / 1;
-    background-color: #7a5ddd;
+    aspect-ratio: 7 / 1;
     z-index: 100000;
 }
 
@@ -105,16 +111,10 @@ a{
 body{
     background-color: var(--mode);
     color: var(--text-color);
-    font-family: 'Type Machine';
-    padding-top: 20vmin;
+    font-family: 'Dignitary-Light';
+    padding-top: 10vmin;
 }
 
-.mid-bar{
-    max-height: 350px;
-    flex-shrink: 0;
-    height: 350px;
-    width: auto;
-}
 .key{
     max-height: 300px;
 }
@@ -122,17 +122,18 @@ body{
 header{
     width: 75%;
     margin: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     gap: 1.5rem;
     
     div{
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 3.5rem;
+        gap: 1.5rem;
         width: 0px;
         overflow: hidden;
         font-size: 0rem;
@@ -142,16 +143,40 @@ header{
 }
 
 header picture{
-    /* border-radius: 15px;  */
+
     overflow: hidden;
     border: 5px solid var(--text-color);
+}
+
+#welcome picture{
+    width: 150px;
+}
+
+#welcome picture img{
+    width: 100%;
+    height: auto;
+}
+
+#welcome h1{
+    text-align: center;
 }
 
 #whoami{
     width: 50%;
     margin: auto;
     margin-bottom: 3rem;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+}
+
+.hl{
+    color: var(--bello-red);
+    font-weight: 600;
+}
+
+.hl-bg{
+    background-color: #7b5ddd48;
+    padding: 0 0.2em;
+    border-radius: 4px;
 }
 
 #welcome{
@@ -167,12 +192,12 @@ header picture{
     padding: 0 3.5rem;
     overflow: hidden;
 }
-.ungrow{
-    animation: grow 1s ease reverse forwards;
-    width: 0%;
-    font-size: 0rem;
-    padding: 0rem;
-    overflow: hidden;
+
+#welcome.grow{
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0 2rem;
+    font-size: 1.5rem;
 }
 @keyframes grow{
     0%{
@@ -198,7 +223,7 @@ header picture{
     }
 
     100%{
-        transform: scaleX(1) translateY(-3rem);
+        transform: scaleX(1) translateY(1rem);
         width: 100%;
         opacity: 1;
     }
@@ -206,18 +231,32 @@ header picture{
 
 .air{
     width: 100%;
-    height: 30rem;
+    height: var(--air-height);
     
+}
+
+.tagline{
+    margin: auto;
+    margin-top: 1rem;
+    text-align: center;
+    font-family: 'Type Machine';
+    width: fit-content;
+    max-width: 90%;
+    padding: 0.5rem 1.5rem;
+    background-color: #31383d;
+    border: 1px solid var(--section-bg);
+    border-radius: 15px;
+    color: var(--section-text);
 }
 
 main{
 
-    padding-bottom: 50vh;
+    padding-bottom: 15vh;
 }
 
 h2{
     font-size: 2.5rem;
-    font-family: 'Dignitary';
+    font-family: 'Type Machine';
 }
 
 
@@ -319,7 +358,7 @@ hr{
 
 .project{
     max-width: 45%;
-    letter-spacing: 0.06rem;
+    min-width: 450px;
 }
 
 .project h3{
@@ -327,7 +366,7 @@ hr{
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--h3-color) ;
-    text-shadow: 0 0 2px var(--h3-color);
+    text-shadow: 0 0 5px var(--h3-color);
 }
 
 .tags{
@@ -338,6 +377,7 @@ hr{
 }
 .tag{
     --tech-color: #fefefe;
+    font-family: 'Type Machine', monospace;
 
     border-radius: 25px; 
     background-color: var(--tech-color); 
@@ -362,6 +402,7 @@ hr{
     max-width: 350px;
     border: 5px solid var(--bello-red);
     box-shadow: inset 0px 0px 10px 0px var(--text-color);
+    position: relative;
 
     text-align: center;
     color: var(--bello-black);
@@ -370,9 +411,15 @@ hr{
 }
 
 .edu-card h3{
-    font-family: 'Dignitary';
+    font-family: 'Type Machine';
     font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
 
+.edu-card h4{
+    font-family: 'Type Machine', monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
 }
 
 .edu-card hr{
@@ -397,6 +444,24 @@ hr{
   transform: translateZ(60px);
 
   text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.coming-soon::after{
+    content: 'Coming Soon';
+    position: absolute;
+    left: 50%;
+    bottom: -1.5rem;
+    transform: translateX(-50%);
+    background-color: var(--bello-purple);
+    color: var(--bello-cream);
+    font-family: 'Dignitary';
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    padding: 0.45rem 2.2rem;
+    white-space: nowrap;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .cursor-modal {
@@ -448,10 +513,25 @@ hr{
     text-align: center;
 }
 
+.garabato{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    flex-wrap: wrap;
+    width: 80%;
+    gap: 5px;
+}
+.garabato span{
+    background-color: #2D333B80;
+    height: 3px;
+    width: var(--aleatorio, 10px);
+}
+
 .gh-badge {
     display: inline-flex;
     align-items: center;
     font-size: 0.7rem;
+    font-family: 'Type Machine', monospace;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 999px;
@@ -460,7 +540,6 @@ hr{
     vertical-align: middle;
     cursor: default;
     transition: background 0.2s;
-    font-family: 'Type Machine', monospace;
     font-weight: 400;
     color: var(--bello-cream);
     white-space: nowrap;
@@ -475,6 +554,7 @@ hr{
     gap: 0.2rem;
     margin: 0 0.3rem;
     font-size: 0.8rem;
+    font-family: 'Type Machine', monospace;
     color: #ccc;
 }
 .gh-stat + .gh-stat::before {
@@ -503,6 +583,7 @@ hr{
     align-items: baseline;
     gap: 0.5rem;
     font-size: 0.72rem;
+    font-family: 'Type Machine', monospace;
     line-height: 1.5;
     color: #bbb;
 }
@@ -527,8 +608,7 @@ hr{
     display: flex;
     justify-content: center;
     background-color: #31383d;
-    outline: 10px solid var(--section-bg);
-    outline-offset: -6px;
+    border: 1px solid var(--section-bg);
     padding: 1.5rem 2rem;
     border-radius: 15px;
 }
@@ -557,6 +637,7 @@ hr{
 
 .gh-month-label {
     font-size: 0.6rem;
+    font-family: 'Type Machine', monospace;
     color: var(--section-text);
     opacity: 0.5;
     text-align: left;
@@ -566,6 +647,7 @@ hr{
 
 .gh-day-label {
     font-size: 0.55rem;
+    font-family: 'Type Machine', monospace;
     color: var(--section-text);
     opacity: 0.4;
     text-align: right;
@@ -584,10 +666,14 @@ hr{
     background: var(--bello-black);
 }
 
-.gh-day[data-level="1"]  { background: var(--bello-purple); }
-.gh-day[data-level="2"]  { background: #a32431; }
-.gh-day[data-level="3"]  { background: var(--bello-red); }
-.gh-day[data-level="4"]  { background: var(--bello-cream); }
+
+
+
+
+.gh-day[data-level="1"]  { background: #58303A; }
+.gh-day[data-level="2"]  { background: #822B39; }
+.gh-day[data-level="3"]  { background: #AD2938; }
+.gh-day[data-level="4"]  { background: #D72638; }
 
 .gh-day:not(.gh-day-label)[data-count]::after {
     content: attr(data-count) ' commits on ' attr(data-date);
@@ -616,6 +702,7 @@ hr{
     align-items: center;
     gap: 6px;
     font-size: 0.7rem;
+    font-family: 'Type Machine', monospace;
     color: var(--section-text);
     opacity: 0.6;
     align-self: flex-end;
@@ -633,11 +720,11 @@ hr{
     border-radius: 2px;
 }
 
-.gh-legend-swatches span[data-level="0"] { background: var(--bello-black); border: 1px solid rgba(255,255,255,0.08); }
-.gh-legend-swatches span[data-level="1"] { background: var(--bello-purple); }
-.gh-legend-swatches span[data-level="2"] { background: #a32431; }
-.gh-legend-swatches span[data-level="3"] { background: var(--bello-red); }
-.gh-legend-swatches span[data-level="4"] { background: var(--bello-cream); }
+.gh-legend-swatches span[data-level="0"] { background: #2D333B }
+.gh-legend-swatches span[data-level="1"] { background: #58303A; }
+.gh-legend-swatches span[data-level="2"] { background: #822B39; }
+.gh-legend-swatches span[data-level="3"] { background: #AD2938; }
+.gh-legend-swatches span[data-level="4"] { background: #D72638; }
 
 .edu-modal {
     position: fixed;
@@ -665,9 +752,11 @@ hr{
 
 .edu-modal-content {
     position: relative;
-    background: var(--modal-bg);
-    color: var(--modal-text);
-    border-radius: 16px;
+    background: rgb(252 255 246);
+    color: var(--bello-black);
+    text-align: center;
+    border: 5px solid var(--bello-red);
+    border-radius: 0;
     padding: 2rem;
     max-width: 520px;
     width: 90%;
@@ -675,62 +764,266 @@ hr{
     overflow-y: auto;
     transform: scale(0.6);
     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 10px 0 var(--text-color), 0 25px 60px rgba(0, 0, 0, 0.5);
+    margin: auto;
 }
 
 .edu-modal.show .edu-modal-content {
     transform: scale(1);
 }
 
+.edu-modal-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .edu-modal-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.8rem;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    background: rgb(252 255 246);
+    border: 3px solid var(--bello-red);
+    font-family: 'Type Machine', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    padding: 0.5rem 1.1rem;
     line-height: 1;
     cursor: pointer;
-    color: var(--modal-text);
-    opacity: 0.4;
-    transition: opacity 0.2s, color 0.2s;
+    color: var(--bello-black);
+    transition: background 0.2s, color 0.2s;
+    z-index: 2;
 }
 
 .edu-modal-close:hover {
-    opacity: 1;
-    color: var(--bello-red);
+    background: var(--bello-red);
+    color: var(--bello-cream);
 }
 
 .edu-modal-body h3 {
-    font-family: 'Dignitary', serif;
-    font-size: 1.4rem;
-    margin-bottom: 0.2rem;
+    font-family: 'Type Machine', monospace;
+    font-size: 1.5rem;
+    margin: auto;
+    margin-bottom: 0.4rem;
+    margin-top: 1rem;
+    width: 80%;
 }
 
 .edu-modal-body h4 {
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-family: 'Type Machine', monospace;
     opacity: 0.7;
     font-weight: 400;
     margin-bottom: 0.5rem;
 }
 
 .edu-modal-body hr {
-    border-color: var(--bello-red);
+    border-color: var(--bello-black);
     opacity: 0.3;
-    margin: 0.6rem 0;
+    margin: 0.8rem auto;
+    width: 100%;
 }
 
 .edu-modal-body p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.6;
-    color: var(--modal-text);
+    color: var(--bello-black);
+}
+
+.edu-card.fasta::before,
+.edu-modal-content.fasta::before{
+    content: "";
+    width: 40px;
+    height: 40px;
+    background: url(../assets/props/fasta-logotipo.png) center / contain no-repeat;
+}
+
+.edu-card.davinci::before,
+.edu-modal-content.davinci::before{
+    content: "";
+    width: 60px;
+    aspect-ratio: 744 / 244;
+    background: url(../assets/props/davinci-logtipo.png) center / contain no-repeat;
+}
+
+.edu-card.fasta::before, .edu-card.davinci::before{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.edu-modal-content.fasta::before, .edu-modal-content.davinci::before{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.edu-modal-content.fasta::before{
+    width: 60px;
+    height: 60px;
+}
+
+.edu-modal-content.davinci::before{
+    width: 90px;
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 30vmin;
+    }
+
+    header {
+        width: 90%;
+        gap: 0.75rem;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .key {
+        display: none;
+    }
+
+    header div {
+        gap: 1rem;
+    }
+
+    #welcome.grow {
+        font-size: 1.3rem;
+        padding: 0 0.5rem;
+    }
+
+    #welcome picture {
+        width: 120px;
+        flex-shrink: 0;
+        border-width: 3px;
+    }
+
+    #welcome picture img {
+        width: 100%;
+        height: auto;
+    }
+
     #gh-contrib-section {
+        margin-bottom: 2rem;
         outline: 5px solid var(--section-bg);
         outline-offset: -3px;
         padding: 1rem;
         overflow-x: auto;
+    }
+
+    #keeper {
+        display: none;
+    }
+
+    #whoami{
+        width: 90%;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .clip-section {
+        position: relative;
+        height: auto;
+        min-height: 70vh;
+        padding: 1rem 1.2rem;
+
+        top: 4rem;
+    }
+
+    .clip-section .content {
+        width: 100%;
+    }
+
+    .clip-section:nth-child(3),
+    .clip-section:nth-child(5) {
+        position: relative;
+        height: auto;
+        min-height: 70vh;
+    }
+
+    .clip-section h2 {
+        font-size: 2rem;
+    }
+
+    .clip-icon {
+        width: 1.6rem;
+        top: -1.8rem;
+    }
+
+    #lab .clip-icon,
+    #education .clip-icon {
+        translate: 0;
+    }
+
+    .project {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .edu-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .air {
+        display: none;
+    }
+
+    .section-logo {
+        width: 48px;
+        top: 0.5rem;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 36vmin;
+    }
+
+    #welcome.grow {
+        font-size: 1.05rem;
+        padding: 0 0.25rem;
+    }
+
+    header div {
+        gap: 0.6rem;
+    }
+
+    #welcome picture {
+        width: 90px;
+    }
+
+    .clip-section {
+        position: static;
+        padding: 0.8rem;
+        top: 3rem;
+    }
+
+    .clip-section h2 {
+        font-size: 1.7rem;
+    }
+
+    .clip-icon {
+        width: 1.3rem;
+        top: -1.5rem;
+    }
+
+    .project h3 {
+        font-size: 1.2rem;
+    }
+
+    .edu-card {
+        padding: 0.8rem;
     }
 }

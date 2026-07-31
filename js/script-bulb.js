@@ -26,7 +26,6 @@ const DUMMY_CORD = document.querySelector('.toggle-scene__dummy-cord line');
 const PROXY = document.createElement('div');
 const WELCOME = document.getElementById('welcome');
 const WHOAMI_P = document.querySelectorAll('#whoami p');
-const MID = document.querySelector('.mid-bar');
 const MAIN = document.querySelector('main');
 const CONTACT = document.getElementById('contact');
 const air = document.querySelectorAll('.air');
@@ -48,7 +47,7 @@ const onStart = () => {
   set(document.documentElement, {'--section-bg': STATE.ON ? "var(--bello-black)" :"#9c2430"});
   set(document.documentElement, {'--h3-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
   set(document.documentElement, {'--clip-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--section-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-cream)"});
+  set(document.documentElement, {'--section-text': STATE.ON ? "var(--bello-cream)" : "#fff2c7b6 "});
   set(document.documentElement, {'--text-color': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
   set(document.documentElement, {'--title-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-cream)"});
   set(document.documentElement, {'--hr-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-black)"});

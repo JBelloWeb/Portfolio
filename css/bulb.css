@@ -80,3 +80,21 @@
 html.off .tag {
   color: hsl(from var(--tech-color) h 100 calc(l + 20) / 70%);
 }
+
+@media (max-width: 768px) {
+    .toggle-scene {
+        height: 50vmin;
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .toggle-scene {
+        height: 60vmin;
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+}
