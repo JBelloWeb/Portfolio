@@ -12,11 +12,6 @@ let IS_PLAYING = false;
 const AUDIO = {
   CLICK: new Audio('https://assets.codepen.io/605876/click.mp3') };
 
-const STATE = {
-  ON: false };
-
-document.documentElement.classList.add('off');
-
 const CORD_DURATION = 0.1;
 
 const CORDS = document.querySelectorAll('.toggle-scene__cord');
@@ -40,22 +35,7 @@ RESET();
 
 const onStart = () => {
   IS_PLAYING = true;
-  STATE.ON = !STATE.ON;
 
-  set(document.documentElement, { '--on': STATE.ON ? 1 : 0 });
-  set(document.documentElement, {'--mode': STATE.ON ? "var(--bello-cream)" :"var(--bello-black)"});
-  set(document.documentElement, {'--section-bg': STATE.ON ? "var(--bello-black)" :"#9c2430"});
-  set(document.documentElement, {'--h3-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--clip-color': STATE.ON ? "var(--bello-red)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--section-text': STATE.ON ? "var(--bello-cream)" : "#fff2c7b6 "});
-  set(document.documentElement, {'--text-color': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--title-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--hr-color': STATE.ON ? "var(--bello-purple)" : "var(--bello-black)"});
-  // set(document.documentElement, {'--cord': STATE.ON ? "#d72638" : "#fff2c7"});
-  document.documentElement.classList.toggle('off', !STATE.ON);
-
-  set(document.documentElement, {'--modal-bg': STATE.ON ? "var(--bello-black)" : "var(--bello-cream)"});
-  set(document.documentElement, {'--modal-text': STATE.ON ? "var(--bello-cream)" : "var(--bello-black)"});
   set(DUMMY, { display: 'none' });
   set(CORDS[0], { display: 'inline' });
   AUDIO.CLICK.play();
@@ -66,6 +46,7 @@ const onComplete = () => {
   set(CORDS[0], { display: 'none' });
   RESET();
   IS_PLAYING = false;
+  openIdeaModal();
 };
 
 const buildTimeline = () => {
@@ -120,3 +101,83 @@ Draggable.create(PROXY, {
   } });
 
 WELCOME.classList.add('grow');
+
+const WEB3FORMS_ACCESS_KEY = 'a6b3a2ca-d7a7-42bb-9f96-91c5c6f7d8b5';
+
+const IDEA_MODAL = document.getElementById('idea-modal');
+const IDEA_FORM = document.getElementById('idea-form');
+const IDEA_TEXT = document.getElementById('idea-text');
+const IDEA_EMAIL = document.getElementById('idea-email');
+const IDEA_SUBMIT = document.getElementById('idea-submit');
+const IDEA_STATUS = document.getElementById('idea-status');
+
+const openIdeaModal = () => {
+  if (!IDEA_MODAL) return;
+  document.documentElement.classList.add('turn-on');
+  IDEA_STATUS.textContent = '';
+  IDEA_STATUS.classList.remove('success', 'error');
+  IDEA_FORM.reset();
+  setTimeout(() => IDEA_TEXT?.focus(), 350);
+};
+
+const closeIdeaModal = () => {
+  const root = document.documentElement;
+  if (!root.classList.contains('turn-on')) return;
+  root.classList.remove('turn-on');
+  root.classList.add('idea-off');
+  setTimeout(() => root.classList.remove('idea-off'), 600);
+};
+
+IDEA_MODAL?.addEventListener('click', e => {
+  if (e.target.closest('.idea-modal-content') && !e.target.closest('.idea-modal-close')) return;
+  closeIdeaModal();
+});
+
+IDEA_FORM?.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!IDEA_TEXT.value.trim()) {
+    IDEA_STATUS.textContent = 'Contame primero tu idea';
+    IDEA_STATUS.classList.add('error');
+    IDEA_TEXT.focus();
+    return;
+  }
+  if (WEB3FORMS_ACCESS_KEY === 'TU_ACCESS_KEY_AQUI') {
+    IDEA_STATUS.textContent = 'Falta configurar el access_key de Web3Forms';
+    IDEA_STATUS.classList.add('error');
+    return;
+  }
+
+  IDEA_SUBMIT.disabled = true;
+  IDEA_STATUS.textContent = 'Enviando...';
+  IDEA_STATUS.classList.remove('success', 'error');
+
+  const data = new FormData();
+  data.append('access_key', WEB3FORMS_ACCESS_KEY);
+  data.append('subject', 'Nueva idea para el portfolio BelloDev');
+  data.append('from_name', 'Portfolio BelloDev');
+  data.append('idea', IDEA_TEXT.value.trim());
+  if (IDEA_EMAIL.value.trim()) data.append('email', IDEA_EMAIL.value.trim());
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    const result = await res.json();
+    if (result.success) {
+      IDEA_STATUS.textContent = '¡Gracias! Tu idea fue enviada';
+      IDEA_STATUS.classList.add('success');
+      IDEA_FORM.reset();
+      setTimeout(closeIdeaModal, 1800);
+    } else {
+      IDEA_STATUS.textContent = result.message || 'No se pudo enviar, intentá de nuevo';
+      IDEA_STATUS.classList.add('error');
+    }
+  } catch {
+    IDEA_STATUS.textContent = 'Error de conexión, intentá de nuevo';
+    IDEA_STATUS.classList.add('error');
+  } finally {
+    IDEA_SUBMIT.disabled = false;
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeIdeaModal();
+});

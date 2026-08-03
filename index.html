@@ -63,9 +63,20 @@
     </svg> -->
 </div>
 
-<div id="keeper">
-    <div class="modal">
-        
+<div id="idea-modal" class="idea-modal">
+    <div class="idea-modal-backdrop"></div>
+    <div class="idea-modal-frame">
+        <button class="idea-modal-close">close</button>
+        <div class="idea-modal-content">
+            <h3 class="idea-modal-title">Proponé una idea</h3>
+            <p class="idea-modal-hint">¿Se prendió el foco? Contame la idea que tenes en mente.</p>
+            <form id="idea-form" novalidate>
+                <textarea id="idea-text" name="idea" rows="1" placeholder="Contame tu idea..." required></textarea>
+                <input type="email" id="idea-email" name="email" placeholder="Tu email (opcional)">
+                <button type="submit" id="idea-submit">Enviar</button>
+                <p id="idea-status" class="idea-status" role="status"></p>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -117,7 +128,7 @@
 
                 <div class="card-container">
                     <div class="card project" data-image="assets/media/gallery/prode/hover-prev.webp" data-repo="JBelloWeb/prode-mundial-254">
-                        <a target="_blank" href="https://prode254.vercel.app"><h3>World Cup Prode <span class="gh-badge" data-repo="JBelloWeb/prode-mundial-254"></span></h3></a>
+                        <a target="_blank" href="https://prode254.vercel.app"><h3>Prode 254<span class="gh-badge" data-repo="JBelloWeb/prode-mundial-254"></span></h3></a>
                         <hr>
                         <p>Plataforma de predicciones mundialistas con login, ranking global, bracket interactivo, scoring granular, y +1000 predicciones reales durante el Mundial 2026. Backend serverless, webhooks para emails automáticos, y debugging de triggers SQL complejos.</p>
                         <div class="tags"><div class="tag">HTML</div><div class="tag">CSS</div><div class="tag">JavaScript</div><div class="tag">Vanilla</div><div class="tag">Frontend</div><div class="tag">Supabase</div><div class="tag">Backend</div></div>
@@ -155,7 +166,7 @@
 
 
             <div class="content">
-                <h2>Lab</h2>
+                <h2 class="t-purple">Lab</h2>
                 <hr class="header-hr">
 
             </div>
@@ -168,13 +179,13 @@
             <img class="section-logo" src="assets/props/LogoPNG.png" alt="" />
 
             <div class="content">
-                <h2 class="t-red">Education</h2>
+                <h2 class="t-purple">Education</h2>
                 <hr class="header-hr">
 
                 <div class="card-container container-3d">
                     <div class="edu-card card-3d fasta">
                         <div class="content-3d">
-                            <h3>Bachillerato en Comincación</h3>
+                            <h3>Bachillerato en Comunicación</h3>
                             <h4>FASTA || 2016 - 2020</h4>
                             <hr>
                             <div class="garabato">
@@ -259,7 +270,7 @@
     <script src='https://assets.codepen.io/16327/MorphSVGPlugin3.min.js'></script>
     <script src='https://unpkg.com/gsap@3/dist/Draggable.min.js'></script>
 
-    <script src="js/script-bulb.js"></script>
+    <script src="js/script-bulb.js"></script> 
     <script src="js/main.js"></script>
 
     

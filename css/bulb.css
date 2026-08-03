@@ -4,7 +4,7 @@
 :root {
   --on: 0;
   --bg: #1f2428;
-  --cord: #d72638;
+  --cord: #fff2c7;
   --lamp-body: var(--cord);
   --lamp-detail: var(--cord);
   --lamp-base: var(--cord);
@@ -69,16 +69,45 @@
   fill: var(--lamp-accent);
 }
 
-.tag {
-  transition: background-color 0.3s, color 0.3s;
-  background-color: color-mix(in srgb,
-    var(--bello-black) calc((1 - var(--on)) * 100%),
-    var(--tech-color) calc(var(--on) * 100%)
-  );
+@property --on {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
 }
 
-html.off .tag {
-  color: hsl(from var(--tech-color) h 100 calc(l + 20) / 70%);
+@keyframes lamp-warmup {
+  0%   { --on: 0 }
+  4%   { animation-timing-function: ease-in;  --on: 0.5 }
+  6%   { animation-timing-function: ease-out; --on: 0.06 }
+  10%  { animation-timing-function: ease-in;  --on: 0.7 }
+  13%  { animation-timing-function: ease-out; --on: 0.1 }
+  18%  { animation-timing-function: ease-in;  --on: 0.92 }
+  23%  { animation-timing-function: ease-out; --on: 0.18 }
+  32%  { animation-timing-function: ease-in;  --on: 1 }
+  38%  { animation-timing-function: ease-out; --on: 0.32 }
+  48%  { animation-timing-function: ease-in;  --on: 1 }
+  58%  { animation-timing-function: ease-out; --on: 0.72 }
+  100% { animation-timing-function: ease-in;  --on: 1 }
+}
+
+@keyframes lamp-off {
+  0%   { --on: 1 }
+  35%  { animation-timing-function: ease-in;  --on: 0.6 }
+  60%  { animation-timing-function: ease-out; --on: 0.25 }
+  85%  { animation-timing-function: ease-in;  --on: 0.6 }
+  100% { animation-timing-function: ease-out; --on: 0 }
+}
+
+html.turn-on {
+  animation: lamp-warmup 2s linear forwards;
+}
+
+html.idea-off {
+  animation: lamp-off 0.55s ease-in forwards;
+}
+
+.tag {
+  background-color: var(--tech-color);
 }
 
 @media (max-width: 768px) {
@@ -96,5 +125,22 @@ html.off .tag {
         left: auto;
         right: 0;
         transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.turn-on {
+        animation-duration: 0.001s;
+    }
+    html.idea-off {
+        animation-duration: 0.001s;
+    }
+    html.turn-on .toggle-scene__bulb,
+    html.idea-off .toggle-scene__bulb,
+    html.turn-on #idea-modal,
+    html.idea-off #idea-modal,
+    html.turn-on .idea-modal::before,
+    html.idea-off .idea-modal::before {
+        filter: none;
     }
 }

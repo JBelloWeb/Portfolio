@@ -273,8 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fillGhBadges();
     renderGhContrib();
 
+    const hideCursorModal = () => modal.classList.remove('show');
+    window.addEventListener('scroll', hideCursorModal, { passive: true, capture: true });
+    window.addEventListener('blur', hideCursorModal);
+
     projects.forEach(project => {
+        let hovering = false;
         project.addEventListener('mouseenter', async () => {
+            hovering = true;
             const imgSrc = project.getAttribute('data-image');
             if (imgSrc) {
                 modalImg.src = imgSrc;
@@ -319,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalText.style.display = 'none';
             }
 
+            if (!hovering) return;
             modal.classList.add('show');
         });
 
@@ -330,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         project.addEventListener('mouseleave', () => {
+            hovering = false;
             modal.classList.remove('show');
         });
     });
