@@ -166,7 +166,7 @@ header picture{
 }
 
 .grow{
-    animation: grow 2.5s ease 0.8s forwards;
+    animation: grow 1s ease forwards;
     width: 100%;
     font-size: 2rem;
     padding: 0 3.5rem;
@@ -227,6 +227,30 @@ header picture{
     border: 1px solid var(--section-bg);
     border-radius: 15px;
     color: var(--section-text);
+    
+    opacity: 0;
+}
+
+.tagline.visible {
+    animation: tagline-reveal 0.8s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+    animation-delay: 0.8s;
+}
+
+@keyframes tagline-reveal {
+    from {
+        opacity: 0;
+        transform: perspective(1000px) rotateX(90deg);
+        box-shadow: 0px 0px 5px 0px rgba(36, 36, 36, 0.205);
+    }
+    50%{
+        opacity: 1;
+    }
+    
+    to {
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0deg) translateY(-10rem);
+        box-shadow: 0px 10px 20px 2px rgba(20, 20, 20, 0.541);
+    }
 }
 
 main{
@@ -285,8 +309,8 @@ hr{
 }
 
 .clip-section:nth-child(1) { z-index: 1; }
-.clip-section:nth-child(3) { z-index: 2;  height: 88vh;}
-.clip-section:nth-child(5) { z-index: 3;  height: 86vh;}
+.clip-section:nth-child(3) { z-index: 2;}
+.clip-section:nth-child(5) { z-index: 3;}
 
 .clip-icon{
     display: block;
@@ -298,9 +322,9 @@ hr{
     margin: 0 1rem;
 
     opacity: 0;
-    transform: translateY(-6rem) scale(0.8);
+    transform: translateY(-10rem) scale(1);
 
-    transition: opacity 0.6s ease, transform 0.25s ease;
+    transition: opacity 1.5s ease 0.6s, transform 1s ease 0.5s;
 }
 
 .clip-icon.visible{
@@ -309,7 +333,8 @@ hr{
 }
 
 .clip-icon:hover{
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-10px) scale(1);
+    transition: transform 0.25s ease;
 }
 
 #lab .clip-icon{
@@ -653,16 +678,50 @@ hr{
     position: relative;
     cursor: default;
     background: var(--bello-black);
+
+    animation: shine 3s ease ;
+    animation-delay: 1s;
 }
 
 
 
 
 
-.gh-day[data-level="1"]  { background: #58303A; }
-.gh-day[data-level="2"]  { background: #822B39; }
-.gh-day[data-level="3"]  { background: #AD2938; }
-.gh-day[data-level="4"]  { background: #D72638; }
+.gh-day[data-level="1"]  { 
+    --level-color: #58303A;
+    --level: 1;
+    background: var(--level-color); 
+}
+.gh-day[data-level="2"]  { 
+    --level-color: #822B39;
+    --level: 2;
+    background: var(--level-color); 
+}
+.gh-day[data-level="3"]  {
+    --level-color: #AD2938; 
+    --level: 3;
+    background: var(--level-color); 
+}
+.gh-day[data-level="4"]  {
+    --level-color: #D72638; 
+    --level: 4;
+    background: var(--level-color); 
+}
+
+@keyframes shine {
+    0%{
+        filter: brightness(1);
+        box-shadow: 0 0 12px 2px color-mix(in srgb, var(--level-color) calc(25% * var(--level)), transparent);
+    }
+    50%{
+        filter: brightness(var(--level));
+        box-shadow: 0 0 12px 2px color-mix(in srgb, var(--level-color) calc(25% * var(--level)), transparent);
+    }
+    100%{
+        filter: brightness(1);
+        box-shadow: 0 0 12px 2px color-mix(in srgb, var(--level-color) calc(25% * var(--level)), transparent);
+    }
+}
 
 .gh-day:not(.gh-day-label)[data-count]::after {
     content: attr(data-count) ' commits on ' attr(data-date);
@@ -1145,6 +1204,16 @@ hr{
         flex-direction: column;
     }
 
+    .idea-modal-frame {
+        width: 92%;
+        max-width: none;
+    }
+
+    .idea-modal-content {
+        width: 100%;
+        padding: 1.25rem;
+    }
+
     .air {
         display: none;
     }
@@ -1155,13 +1224,6 @@ hr{
         left: 50%;
         right: auto;
         transform: translateX(-50%);
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-        gap: 1.8rem;
-        text-align: center;
     }
 
     .footer-key {
@@ -1192,6 +1254,14 @@ hr{
     flex-direction: column;
     justify-content: center;
     gap: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    #contact-form {
+        width: 90%;
+        max-width: 480px;
+        margin: 3rem auto;
+    }
 }
 
 #contact-form label {
@@ -1272,6 +1342,15 @@ footer {
     gap: 2.5rem;
     width: 85%;
     max-width: 1100px;
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 1.8rem;
+        text-align: center;
+    }
 }
 
 .footer-key {
@@ -1398,6 +1477,11 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     .footer-marquee-track {
         animation: none;
+    }
+
+    .tagline {
+        animation: none;
+        opacity: 1;
     }
 }
 

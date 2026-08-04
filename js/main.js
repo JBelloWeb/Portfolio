@@ -7,23 +7,39 @@ const sections = [projects, lab, education];
 const tags = document.querySelectorAll('.tag');
 
 
-const observer = new IntersectionObserver(entries => {
+const clipObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    entry.target.classList.toggle('visible', entry.isIntersecting);
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      clipObserver.unobserve(entry.target);
+    }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.9 });
 
 sections.forEach(s => {
   const icon = s.querySelector('.clip-icon');
   if (!icon) return;
 
-  observer.observe(icon);
+  clipObserver.observe(icon);
 
   icon.addEventListener('click', () => {
     sections.forEach(sec => sec.style.zIndex = '');
     s.style.zIndex = '10';
   });
 });
+
+const tagline = document.querySelector('.tagline');
+if (tagline) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(tagline);
+}
 
 for(let t of tags){
   switch(t.textContent){
