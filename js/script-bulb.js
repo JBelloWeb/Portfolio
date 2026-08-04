@@ -181,3 +181,63 @@ IDEA_FORM?.addEventListener('submit', async e => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeIdeaModal();
 });
+
+const CONTACT_FORM = document.getElementById('contact-form');
+const CONTACT_SUBMIT = CONTACT_FORM?.querySelector('button[type="submit"]');
+const CONTACT_STATUS = document.getElementById('contact-status');
+
+CONTACT_FORM?.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!CONTACT_STATUS) return;
+
+  const fd = new FormData(CONTACT_FORM);
+  if (!fd.get('motivo')) {
+    CONTACT_STATUS.textContent = 'Elegí un motivo';
+    CONTACT_STATUS.classList.add('error');
+    return;
+  }
+  if (!fd.get('email') || !fd.get('mensaje')) return;
+
+  CONTACT_SUBMIT.disabled = true;
+  CONTACT_STATUS.textContent = 'Enviando...';
+  CONTACT_STATUS.classList.remove('success', 'error');
+
+  const data = new FormData();
+  data.append('access_key', WEB3FORMS_ACCESS_KEY);
+  data.append('subject', 'Nuevo mensaje de contacto — Portfolio BelloDev');
+  data.append('from_name', 'Portfolio BelloDev');
+  data.append('nombre', fd.get('nombre') || '—');
+  data.append('email', fd.get('email'));
+  data.append('motivo', fd.get('motivo'));
+  data.append('proyecto_favorito', fd.get('proyecto_favorito') || '—');
+  data.append('mensaje', fd.get('mensaje'));
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    const result = await res.json();
+    if (result.success) {
+      CONTACT_STATUS.textContent = '¡Gracias! Mensaje enviado';
+      CONTACT_STATUS.classList.add('success');
+      CONTACT_FORM.reset();
+    } else {
+      CONTACT_STATUS.textContent = result.message || 'No se pudo enviar, intentá de nuevo';
+      CONTACT_STATUS.classList.add('error');
+    }
+  } catch {
+    CONTACT_STATUS.textContent = 'Error de conexión, intentá de nuevo';
+    CONTACT_STATUS.classList.add('error');
+  } finally {
+    CONTACT_SUBMIT.disabled = false;
+  }
+});
+
+const FOOTER_YEAR = document.getElementById('footer-year');
+if (FOOTER_YEAR) FOOTER_YEAR.textContent = String(new Date().getFullYear());
+
+const FOOTER_IDEA = document.getElementById('footer-idea');
+FOOTER_IDEA?.addEventListener('click', openIdeaModal);
+
+const FOOTER_TOP = document.getElementById('footer-top');
+FOOTER_TOP?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});

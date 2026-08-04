@@ -152,20 +152,80 @@ function timeAgo(dateStr) {
     return `${Math.floor(mo / 12)}y ago`;
 }
 
+const SNAPSHOT_TTL = 6 * 3600 * 1000;
+const REPO_TTL = 3600 * 1000;
+const COMMITS_TTL = 24 * 3600 * 1000;
+const CONTRIB_TTL = 6 * 3600 * 1000;
+
+function cacheGet(key) {
+    try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+        return JSON.parse(raw);
+    } catch {
+        return null;
+    }
+}
+
+function cacheSet(key, data, etag) {
+    try {
+        localStorage.setItem(key, JSON.stringify({ ts: Date.now(), etag: etag || '', data }));
+    } catch {}
+}
+
+async function fetchCached(url, { ttlMs, cacheKey } = {}) {
+    const key = cacheKey || `gh:${url}`;
+    const cached = cacheGet(key);
+
+    if (cached && Date.now() - cached.ts < ttlMs) return cached.data;
+
+    let res;
+    try {
+        res = await fetch(url, cached?.etag ? { headers: { 'If-None-Match': cached.etag } } : undefined);
+    } catch {
+        return cached?.data ?? null;
+    }
+
+    if (res.status === 304) {
+        if (cached) cacheSet(key, cached.data, cached.etag);
+        return cached?.data ?? null;
+    }
+    if (!res.ok) return cached?.data ?? null;
+
+    const data = await res.json();
+    cacheSet(key, data, res.headers.get('etag') || '');
+    return data;
+}
+
+let ghSnapshot = null;
+let ghSnapshotReady = null;
+
+async function loadGhSnapshot() {
+    if (ghSnapshotReady) return ghSnapshotReady;
+    ghSnapshotReady = (async () => {
+        ghSnapshot = await fetchCached('data/github.json', { ttlMs: SNAPSHOT_TTL, cacheKey: 'gh:snapshot' });
+        return ghSnapshot;
+    })();
+    return ghSnapshotReady;
+}
+
 async function fillGhBadges() {
     const badges = document.querySelectorAll('.gh-badge');
     const fetches = [...badges].map(async badge => {
         const repo = badge.dataset.repo;
+        let data;
         try {
-            const res = await fetch(`https://api.github.com/repos/${repo}`);
-            if (!res.ok) return;
-            const data = await res.json();
-            badge.textContent = `🕐 ${timeAgo(data.pushed_at)}`;
-            badge.title = `${data.language || 'N/A'}${data.description ? ` · ${data.description}` : ''}`;
-            badge.closest('.card.project')._repoData = data;
+            data = ghSnapshot?.repos?.[repo] || await fetchCached(`https://api.github.com/repos/${repo}`, {
+                ttlMs: REPO_TTL,
+                cacheKey: `gh:repo:${repo}`,
+            });
         } catch {
-            // fallback silencioso
+            data = null;
         }
+        if (!data) return;
+        badge.textContent = `🕐 ${timeAgo(data.pushed_at)}`;
+        badge.title = `${data.language || 'N/A'}${data.description ? ` · ${data.description}` : ''}`;
+        badge.closest('.card.project')._repoData = data;
     });
     await Promise.all(fetches);
 }
@@ -176,9 +236,17 @@ async function renderGhContrib() {
     const user = container.dataset.user;
 
     try {
-        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`);
-        if (!res.ok) throw new Error();
-        let { contributions } = await res.json();
+        let contributions;
+        const snapContrib = ghSnapshot?.contributions;
+        if (Array.isArray(snapContrib) && snapContrib.length) {
+            contributions = snapContrib;
+        } else {
+            const data = await fetchCached(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`, {
+                ttlMs: CONTRIB_TTL,
+                cacheKey: 'gh:contrib',
+            });
+            contributions = data?.contributions;
+        }
         if (!contributions || !contributions.length) return;
 
         const isMobile = window.innerWidth < 1024;
@@ -264,12 +332,13 @@ async function renderGhContrib() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const projects = document.querySelectorAll('.card.project');
     const modal = document.getElementById('cursor-modal');
     const modalImg = modal.querySelector('.modal-img');
     const modalText = modal.querySelector('.modal-text');
 
+    await loadGhSnapshot();
     fillGhBadges();
     renderGhContrib();
 
@@ -295,10 +364,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!project._commitsLoaded && repoName) {
                     project._commitsLoaded = true;
-                    try {
-                        const res = await fetch(`https://api.github.com/repos/${repoName}/commits?per_page=3`);
-                        if (res.ok) project._commits = await res.json();
-                    } catch {}
+                    const snapCommits = ghSnapshot?.repos?.[repoName]?.commits;
+                    if (Array.isArray(snapCommits) && snapCommits.length) {
+                        project._commits = snapCommits.map(c => ({
+                            commit: { message: c.message, author: { date: c.date } }
+                        }));
+                    } else {
+                        try {
+                            const list = await fetchCached(`https://api.github.com/repos/${repoName}/commits?per_page=3`, {
+                                ttlMs: COMMITS_TTL,
+                                cacheKey: `gh:commits:${repoName}`,
+                            });
+                            if (Array.isArray(list) && list.length) project._commits = list;
+                        } catch {}
+                    }
                 }
 
                 const commits = project._commits;

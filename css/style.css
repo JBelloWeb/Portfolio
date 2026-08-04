@@ -904,7 +904,11 @@ hr{
 }
 
 #idea-form textarea,
-#idea-form input[type="email"] {
+#idea-form input[type="email"],
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea,
+#contact-form select {
     font-family: inherit;
     font-size: 1rem;
     padding: 0.7rem 0.9rem;
@@ -916,22 +920,35 @@ hr{
     width: 100%;
 }
 
-#idea-form input[type="email"] {
+#idea-form input[type="email"],
+#contact-form input[name="nombre"],
+#contact-form select[name="proyecto_favorito"] {
     border-style: dashed;
 }
 
 #idea-form input[type="email"]:focus,
-#idea-form textarea:focus {
+#idea-form textarea:focus,
+#contact-form input:focus,
+#contact-form textarea:focus,
+#contact-form select:focus {
     outline: none;
     border-color: var(--bello-red);
     box-shadow: 0 0 0 2px #d7263855;
 }
 
-#idea-form input[type="email"]:focus {
+#idea-form input[type="email"]:focus,
+#contact-form input[name="nombre"]:focus,
+#contact-form select[name="proyecto_favorito"]:focus {
     border-style: dashed;
 }
 
-#idea-submit {
+#contact-form select option {
+    background: #2D333B;
+    color: var(--bello-cream);
+}
+
+#idea-submit,
+#contact-form button[type="submit"] {
     font-family: 'Type Machine', monospace;
     font-size: 1rem;
     text-transform: uppercase;
@@ -945,7 +962,8 @@ hr{
     transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 
-#idea-submit:hover {
+#idea-submit:hover,
+#contact-form button[type="submit"]:hover {
     background: var(--bello-black);
     border-color: var(--bello-black);
 }
@@ -955,18 +973,21 @@ hr{
     cursor: default;
 }
 
-.idea-status {
+.idea-status,
+#contact-status {
     font-family: 'Type Machine', monospace;
     font-size: 0.85rem;
     min-height: 1.2em;
     margin: 0;
 }
 
-.idea-status.success {
+.idea-status.success,
+#contact-status.success {
     color: #1d7a3e;
 }
 
-.idea-status.error {
+.idea-status.error,
+#contact-status.error {
     color: var(--bello-red);
 }
 
@@ -1120,6 +1141,10 @@ hr{
         max-width: 100%;
     }
 
+    #contact-form > div:first-child {
+        flex-direction: column;
+    }
+
     .air {
         display: none;
     }
@@ -1130,6 +1155,249 @@ hr{
         left: 50%;
         right: auto;
         transform: translateX(-50%);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 1.8rem;
+        text-align: center;
+    }
+
+    .footer-key {
+        display: none;
+    }
+
+    .footer-tagline {
+        margin: 0 auto 1.2rem;
+    }
+
+    .footer-links,
+    .footer-links a {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+#contact-form{
+    width: 40%;
+    margin: 6rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+#contact-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: 'Type Machine', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.8rem;
+    color: var(--bello-cream);
+    opacity: 0.8;
+}
+
+#contact-form > div:first-child {
+    display: flex;
+    gap: 0.9rem;
+}
+
+#contact-form > div:first-child > div {
+    flex: 1;
+}
+
+footer {
+    margin-top: 3rem;
+    background: var(--bello-black);
+    color: var(--bello-cream);
+    border-top: 4px solid var(--bello-red);
+    overflow: hidden;
+}
+
+.footer-marquee {
+    overflow: hidden;
+    padding: 0.7rem 0;
+    background: var(--bello-red);
+    color: var(--bello-cream);
+    font-family: 'Type Machine', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+
+.footer-marquee-track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: footer-marquee 28s linear infinite;
+}
+
+.footer-marquee-group {
+    display: flex;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@keyframes footer-marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.footer-garabato {
+    display: flex;
+    justify-content: center;
+    padding: 1.2rem 0 0;
+}
+
+.footer-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+    gap: 2.5rem;
+    width: 85%;
+    max-width: 1100px;
+}
+
+.footer-key {
+    max-height: 150px;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.footer-wordmark {
+    font-family: 'Type Machine', monospace;
+    font-size: 2rem;
+    color: var(--bello-cream);
+    margin-bottom: 0.6rem;
+}
+
+.footer-wordmark span {
+    color: var(--bello-red);
+    font-size: 1.2rem;
+    vertical-align: super;
+}
+
+.footer-tagline {
+    font-family: 'Dignitary-Light', sans-serif;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    max-width: 26rem;
+    margin-bottom: 1.2rem;
+}
+
+.footer-idea {
+    font-family: 'Type Machine', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    padding: 0.65rem 1.2rem;
+    background: transparent;
+    color: var(--bello-cream);
+    border: 2px solid var(--bello-cream);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.footer-idea:hover {
+    background: var(--bello-red);
+    border-color: var(--bello-red);
+    color: var(--bello-cream);
+}
+
+.footer-heading {
+    font-family: 'Type Machine', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    color: var(--bello-red);
+    margin-bottom: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0;
+}
+
+.footer-links a {
+    font-family: 'Dignitary-Light', sans-serif;
+    font-size: 1rem;
+    color: var(--bello-cream);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--bello-red);
+}
+
+.footer-social svg {
+    flex-shrink: 0;
+}
+
+.footer-open {
+    margin-top: 1rem;
+    font-family: 'Type Machine', monospace;
+    font-size: 0.8rem;
+    color: var(--bello-purple);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--bello-purple);
+    font-family: 'Type Machine', monospace;
+    font-size: 0.8rem;
+    color: var(--bello-cream);
+    opacity: 0.85;
+}
+
+.footer-top {
+    background: transparent;
+    border: 1px solid var(--bello-cream);
+    color: var(--bello-cream);
+    font-family: 'Type Machine', monospace;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.footer-top:hover {
+    background: var(--bello-cream);
+    color: var(--bello-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-marquee-track {
+        animation: none;
     }
 }
 
@@ -1172,5 +1440,17 @@ hr{
 
     .edu-card {
         padding: 0.8rem;
+    }
+
+    .footer-marquee {
+        font-size: 0.7rem;
+    }
+
+    .footer-wordmark {
+        font-size: 1.6rem;
+    }
+
+    .footer-grid {
+        gap: 1.5rem;
     }
 }
