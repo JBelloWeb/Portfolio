@@ -342,6 +342,14 @@ hr{
     min-width: 450px;
 }
 
+@media (min-width: 769px) and (max-width: 1180px) {
+    .project {
+        min-width: 0;
+        max-width: 48%;
+        flex: 1 1 45%;
+    }
+}
+
 .project h3{
     font-family: 'Dignitary';
     font-size: 1.5rem;
@@ -428,7 +436,7 @@ hr{
 }
 
 .coming-soon::after{
-    content: 'Coming Soon';
+    content: 'Proximamente';
     position: absolute;
     left: 50%;
     bottom: -1.5rem;
@@ -1025,6 +1033,12 @@ hr{
     }
 
     #welcome.grow {
+        flex: 0 0 auto;
+        height: auto;
+        width: 100%;
+        animation: none;
+        opacity: 1;
+        transform: none;
         font-size: 1.3rem;
         padding: 0 0.5rem;
     }
