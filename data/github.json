@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T15:42:22.888Z",
+  "generated_at": "2026-08-05T19:14:48.366Z",
   "repos": {
     "JBelloWeb/prode-mundial-254": {
       "pushed_at": "2026-07-20T18:45:50Z",
@@ -28,28 +28,28 @@
       ]
     },
     "JBelloWeb/Goat-Market": {
-      "pushed_at": "2026-07-31T15:27:30Z",
+      "pushed_at": "2026-08-05T18:24:11Z",
       "language": "PHP",
       "description": null,
       "html_url": "https://github.com/JBelloWeb/Goat-Market",
       "commits": [
         {
+          "message": "feat default picture",
+          "date": "2026-08-05T18:24:03Z",
+          "author": "JBelloWeb",
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/02fc7956a5a75fd19d10e0fb62371f85d5df4c9d"
+        },
+        {
+          "message": "fix max-height",
+          "date": "2026-08-05T15:56:51Z",
+          "author": "JBelloWeb",
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/91b187e7dba51674e5bf07b5071a74ffcaa391af"
+        },
+        {
           "message": "update style",
           "date": "2026-07-31T15:27:20Z",
           "author": "JBelloWeb",
           "url": "https://github.com/JBelloWeb/Goat-Market/commit/eac38079be8e227ad897246f08579daa98f48daa"
-        },
-        {
-          "message": "chore: dump de BD autocontenido para importar en Windows (CREATE DATABASE + USE)",
-          "date": "2026-07-31T13:28:45Z",
-          "author": "bellodev",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/772c9fc22fcd8fca87727ab373a02d0008840e9f"
-        },
-        {
-          "message": "feat: cancha con fondo Pitch.webp y posiciones ajustadas",
-          "date": "2026-07-31T13:28:29Z",
-          "author": "bellodev",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/5b0d395770254ae52c7295e987778180e042663a"
         }
       ]
     },
@@ -1565,7 +1565,7 @@
     },
     {
       "date": "2026-08-05",
-      "count": 0
+      "count": 3
     }
   ]
 }
