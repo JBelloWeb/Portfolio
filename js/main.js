@@ -172,6 +172,7 @@ const SNAPSHOT_TTL = 6 * 3600 * 1000;
 const REPO_TTL = 3600 * 1000;
 const COMMITS_TTL = 24 * 3600 * 1000;
 const CONTRIB_TTL = 6 * 3600 * 1000;
+const SNAPSHOT_FRESH_MS = 24 * 3600 * 1000;
 
 function cacheGet(key) {
     try {
@@ -254,7 +255,9 @@ async function renderGhContrib() {
     try {
         let contributions;
         const snapContrib = ghSnapshot?.contributions;
-        if (Array.isArray(snapContrib) && snapContrib.length) {
+        const snapshotFresh = ghSnapshot?.generated_at &&
+            (Date.now() - new Date(ghSnapshot.generated_at).getTime()) < SNAPSHOT_FRESH_MS;
+        if (Array.isArray(snapContrib) && snapContrib.length && snapshotFresh) {
             contributions = snapContrib;
         } else {
             const data = await fetchCached(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`, {
@@ -436,6 +439,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.classList.remove('show');
         });
     });
+});
+
+document.querySelectorAll('.horse').forEach(horse => {
+    horse.addEventListener('click', () => {
+        if (horse.classList.contains('horse-sleep') || horse.classList.contains('horse-gallop')) return;
+        horse.classList.add('horse-sleep');
+    });
+
+    horse.addEventListener('animationend', e => {
+            if (e.animationName !== 'horse-sleep') return;
+            horse.classList.remove('horse-sleep');
+            horse.classList.remove('horse-idle');
+            horse.classList.add('horse-gallop');
+        });
 });
 
 document.querySelectorAll('.edu-card').forEach(card => {

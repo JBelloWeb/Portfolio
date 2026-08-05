@@ -73,6 +73,9 @@ a{
 .t-purple{
     color: var(--bello-purple);
 }
+.t-cream{
+    color: var(--bello-cream);
+}
 .bg-red{
     background-color: var(--bello-red);
 }
@@ -216,8 +219,9 @@ header picture{
 }
 
 .tagline{
+    --tagline-float: 2rem;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 4.5rem;
     text-align: center;
     font-family: 'Type Machine';
     width: fit-content;
@@ -248,7 +252,7 @@ header picture{
     
     to {
         opacity: 1;
-        transform: perspective(1000px) rotateX(0deg) translateY(-10rem);
+        transform: perspective(1000px) rotateX(0deg) translateY(calc(-1 * var(--tagline-float)));
         box-shadow: 0px 10px 20px 2px rgba(20, 20, 20, 0.541);
     }
 }
@@ -1483,6 +1487,12 @@ footer {
         animation: none;
         opacity: 1;
     }
+
+.horse,
+    .horse.horse-sleep,
+    .horse.horse-gallop {
+        animation: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1540,31 +1550,77 @@ footer {
 }
 
 /* ===== Horse sprite animation (galop, rows 13 & 14) ===== */
+.horse-container{
+    width: 100%;
+    overflow: hidden;
+}
+
 .horse{
     --horse-scale: 2;
+    --horse-width: calc(64px * var(--horse-scale));
     display: block;
     margin: 0 auto 3rem;
-    width: calc(64px * var(--horse-scale));
+    width: var(--horse-width);
     height: calc(48px * var(--horse-scale));
     background: url('../assets/props/horses/3.png') no-repeat;
     background-size: calc(512px * var(--horse-scale)) calc(1152px * var(--horse-scale));
+    background-position: 0 calc(-48px * var(--horse-scale) * 12);
+}
+
+.horse:hover{
+    cursor:pointer;
 }
 
 .horse-gallop{
-    animation: horse-gallop 0.8s step-end infinite;
+    --horse-cycle: 0.4s;
+    --horse-run: 2.5s;
+    --horse-run-dist: 100vw;
+    animation:
+        horse-gallop var(--horse-cycle) steps(1,end) infinite,
+        horse-run   var(--horse-run) linear forwards;
 }
 
 @keyframes horse-gallop{
-    0%      { background-position: 0px      -1152px; }
-    8.3333% { background-position: -128px   -1152px; }
-    16.666% { background-position: -256px   -1152px; }
-    25%     { background-position: -384px   -1152px; }
-    33.333% { background-position: -512px   -1152px; }
-    41.666% { background-position: -640px   -1152px; }
-    50%     { background-position: 0px      -1248px; }
-    58.333% { background-position: -128px   -1248px; }
-    66.666% { background-position: -256px   -1248px; }
-    75%     { background-position: -384px   -1248px; }
-    83.333% { background-position: -512px   -1248px; }
-    100%    { background-position: -640px   -1248px; }
+    0%      { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 12); }
+    16.666% { background-position: calc(-64px * var(--horse-scale) * 1)  calc(-48px * var(--horse-scale) * 12); }
+    33.333% { background-position: calc(-64px * var(--horse-scale) * 2)  calc(-48px * var(--horse-scale) * 12); }
+    50%     { background-position: calc(-64px * var(--horse-scale) * 3)  calc(-48px * var(--horse-scale) * 12); }
+    66.666% { background-position: calc(-64px * var(--horse-scale) * 4)  calc(-48px * var(--horse-scale) * 12); }
+    83.333% { background-position: calc(-64px * var(--horse-scale) * 5)  calc(-48px * var(--horse-scale) * 12); }
+    100%    { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 12); }
+}
+
+@keyframes horse-run{
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-1 * var(--horse-run-dist))); }
+}
+
+.horse.horse-sleep{
+    --horse-sleep: 1s;
+    animation: horse-sleep var(--horse-sleep) steps(1,end) forwards;
+}
+
+@keyframes horse-sleep{
+    0%      { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 16); }
+    16.666% { background-position: calc(-64px * var(--horse-scale) * 1)  calc(-48px * var(--horse-scale) * 16); }
+    33.333% { background-position: calc(-64px * var(--horse-scale) * 2)  calc(-48px * var(--horse-scale) * 16); }
+    50%     { background-position: calc(-64px * var(--horse-scale) * 3)  calc(-48px * var(--horse-scale) * 16); }
+    66.666% { background-position: calc(-64px * var(--horse-scale) * 4)  calc(-48px * var(--horse-scale) * 16); }
+    83.333% { background-position: calc(-64px * var(--horse-scale) * 5)  calc(-48px * var(--horse-scale) * 16); }
+    100%    { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 16); }
+}
+
+.horse-idle{
+    --horse-idle: 2s;
+    animation: horse-idle var(--horse-idle) steps(1,end) infinite;
+}
+
+@keyframes horse-idle{
+    0%      { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 4); }
+
+    33.333% { background-position: calc(-64px * var(--horse-scale) * 1)  calc(-48px * var(--horse-scale) * 4); }
+    
+    66.666% { background-position: calc(-64px * var(--horse-scale) * 2)  calc(-48px * var(--horse-scale) * 4); }
+
+    100%    { background-position: calc(-64px * var(--horse-scale) * 3)  calc(-48px * var(--horse-scale) * 4); }
 }
