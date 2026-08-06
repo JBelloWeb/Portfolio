@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-06T13:42:06.842Z",
+  "generated_at": "2026-08-06T23:49:44.130Z",
   "repos": {
     "JBelloWeb/prode-mundial-254": {
       "pushed_at": "2026-07-20T18:45:50Z",
@@ -28,11 +28,17 @@
       ]
     },
     "JBelloWeb/Goat-Market": {
-      "pushed_at": "2026-08-05T18:24:11Z",
+      "pushed_at": "2026-08-06T22:37:43Z",
       "language": "PHP",
       "description": null,
       "html_url": "https://github.com/JBelloWeb/Goat-Market",
       "commits": [
+        {
+          "message": "chore: exportar BD goat_market; email en usuarios; imágenes optimizadas; credenciales en recursos/usuarios.txt",
+          "date": "2026-08-06T22:37:35Z",
+          "author": "JBelloWeb",
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/3cc57c83749b2571b4783212559af53c4037ca49"
+        },
         {
           "message": "feat default picture",
           "date": "2026-08-05T18:24:03Z",
@@ -44,12 +50,6 @@
           "date": "2026-08-05T15:56:51Z",
           "author": "JBelloWeb",
           "url": "https://github.com/JBelloWeb/Goat-Market/commit/91b187e7dba51674e5bf07b5071a74ffcaa391af"
-        },
-        {
-          "message": "update style",
-          "date": "2026-07-31T15:27:20Z",
-          "author": "JBelloWeb",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/eac38079be8e227ad897246f08579daa98f48daa"
         }
       ]
     },
@@ -1569,7 +1569,7 @@
     },
     {
       "date": "2026-08-06",
-      "count": 0
+      "count": 1
     }
   ]
 }
