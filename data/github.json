@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "generated_at": "2026-08-05T13:43:35.470Z",
-=======
-  "generated_at": "2026-08-05T15:37:18.775Z",
->>>>>>> dev
+  "generated_at": "2026-08-06T23:49:44.130Z",
   "repos": {
     "JBelloWeb/prode-mundial-254": {
       "pushed_at": "2026-07-20T18:45:50Z",
@@ -32,28 +28,28 @@
       ]
     },
     "JBelloWeb/Goat-Market": {
-      "pushed_at": "2026-07-31T15:27:30Z",
+      "pushed_at": "2026-08-06T22:37:43Z",
       "language": "PHP",
       "description": null,
       "html_url": "https://github.com/JBelloWeb/Goat-Market",
       "commits": [
         {
-          "message": "update style",
-          "date": "2026-07-31T15:27:20Z",
+          "message": "chore: exportar BD goat_market; email en usuarios; imágenes optimizadas; credenciales en recursos/usuarios.txt",
+          "date": "2026-08-06T22:37:35Z",
           "author": "JBelloWeb",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/eac38079be8e227ad897246f08579daa98f48daa"
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/3cc57c83749b2571b4783212559af53c4037ca49"
         },
         {
-          "message": "chore: dump de BD autocontenido para importar en Windows (CREATE DATABASE + USE)",
-          "date": "2026-07-31T13:28:45Z",
-          "author": "bellodev",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/772c9fc22fcd8fca87727ab373a02d0008840e9f"
+          "message": "feat default picture",
+          "date": "2026-08-05T18:24:03Z",
+          "author": "JBelloWeb",
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/02fc7956a5a75fd19d10e0fb62371f85d5df4c9d"
         },
         {
-          "message": "feat: cancha con fondo Pitch.webp y posiciones ajustadas",
-          "date": "2026-07-31T13:28:29Z",
-          "author": "bellodev",
-          "url": "https://github.com/JBelloWeb/Goat-Market/commit/5b0d395770254ae52c7295e987778180e042663a"
+          "message": "fix max-height",
+          "date": "2026-08-05T15:56:51Z",
+          "author": "JBelloWeb",
+          "url": "https://github.com/JBelloWeb/Goat-Market/commit/91b187e7dba51674e5bf07b5071a74ffcaa391af"
         }
       ]
     },
@@ -1569,7 +1565,11 @@
     },
     {
       "date": "2026-08-05",
-      "count": 0
+      "count": 3
+    },
+    {
+      "date": "2026-08-06",
+      "count": 1
     }
   ]
 }
