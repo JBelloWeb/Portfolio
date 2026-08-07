@@ -441,6 +441,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+document.querySelectorAll('.horse').forEach(horse => {
+    horse.addEventListener('click', () => {
+        if (horse.classList.contains('horse-react') || horse.classList.contains('horse-gallop')) return;
+        horse.classList.add('horse-react');
+    });
+
+    horse.addEventListener('animationend', e => {
+            if (e.animationName !== 'horse-react') return;
+            horse.classList.remove('horse-react');
+            horse.classList.remove('horse-idle');
+            horse.classList.add('horse-gallop');
+        });
+});
+
 document.querySelectorAll('.edu-card').forEach(card => {
     card.addEventListener('click', () => {
         const modal = document.getElementById('edu-modal');
