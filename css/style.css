@@ -481,6 +481,23 @@ hr{
     z-index: 2;
     pointer-events: none;
 }
+.coming-soon-mid::after{
+    content: 'En desarrollo';
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bello-purple);
+    color: var(--bello-cream);
+    font-family: 'Dignitary';
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    padding: 0.45rem 2.2rem;
+    white-space: nowrap;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+    z-index: 2;
+    pointer-events: none;
+}
 
 .cursor-modal {
     position: fixed;
@@ -1573,7 +1590,7 @@ footer {
 
 .horse-gallop{
     --horse-cycle: 0.4s;
-    --horse-run: 2.5s;
+    --horse-run: 4s;
     --horse-run-dist: 100vw;
     animation:
         horse-gallop var(--horse-cycle) steps(1,end) infinite,
@@ -1595,12 +1612,12 @@ footer {
     to   { transform: translateX(calc(-1 * var(--horse-run-dist))); }
 }
 
-.horse.horse-sleep{
-    --horse-sleep: 1s;
-    animation: horse-sleep var(--horse-sleep) steps(1,end) forwards;
+.horse.horse-react{
+    --horse-react: 0.7s;
+    animation: horse-react var(--horse-react) steps(1,end) forwards;
 }
 
-@keyframes horse-sleep{
+@keyframes horse-react{
     0%      { background-position: calc(-64px * var(--horse-scale) * 0)  calc(-48px * var(--horse-scale) * 16); }
     16.666% { background-position: calc(-64px * var(--horse-scale) * 1)  calc(-48px * var(--horse-scale) * 16); }
     33.333% { background-position: calc(-64px * var(--horse-scale) * 2)  calc(-48px * var(--horse-scale) * 16); }

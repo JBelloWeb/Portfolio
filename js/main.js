@@ -443,13 +443,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.querySelectorAll('.horse').forEach(horse => {
     horse.addEventListener('click', () => {
-        if (horse.classList.contains('horse-sleep') || horse.classList.contains('horse-gallop')) return;
-        horse.classList.add('horse-sleep');
+        if (horse.classList.contains('horse-react') || horse.classList.contains('horse-gallop')) return;
+        horse.classList.add('horse-react');
     });
 
     horse.addEventListener('animationend', e => {
-            if (e.animationName !== 'horse-sleep') return;
-            horse.classList.remove('horse-sleep');
+            if (e.animationName !== 'horse-react') return;
+            horse.classList.remove('horse-react');
             horse.classList.remove('horse-idle');
             horse.classList.add('horse-gallop');
         });
